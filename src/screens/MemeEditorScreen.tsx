@@ -93,7 +93,6 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
       const result = await memeGenerator.generateMeme(config, viewShotRef);
       setGeneratedMeme(result.uri);
       setShowSuccessModal(true);
-      console.log('✅ 表情包生成成功:', result);
     } catch (error: any) {
       console.error('❌ 生成失败:', error);
       Alert.alert('生成失败', error.message || '无法生成表情包，请重试');

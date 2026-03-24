@@ -106,7 +106,6 @@ export class GPT4VProvider implements AIProvider {
    * 图片转base64
    */
   private async imageToBase64(imageUri: string): Promise<string> {
-    console.log('转换图片为base64:', imageUri);
     return 'base64_image_data_placeholder';
   }
 }

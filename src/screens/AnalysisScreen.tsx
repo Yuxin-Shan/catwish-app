@@ -56,12 +56,8 @@ export default function AnalysisScreen({ navigation, route }: Props) {
     // 模拟AI分析过程
     const runAnalysis = async () => {
       try {
-        console.log('开始AI分析:', imageUri);
-
         // 调用AI服务 (使用Mock,无需API Key)
         const result = await aiService.analyzeImage(imageUri);
-
-        console.log('AI分析完成:', result);
 
         // 分析完成,跳转到结果页
         setTimeout(() => {

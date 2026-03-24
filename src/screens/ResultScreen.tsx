@@ -55,7 +55,6 @@ export default function ResultScreen({ navigation, route }: Props) {
       };
 
       await storageService.saveAnalysis(record);
-      console.log('已保存到历史记录:', record);
     } catch (error) {
       console.error('保存失败:', error);
     }
@@ -74,10 +73,6 @@ export default function ResultScreen({ navigation, route }: Props) {
         message: `我家的猫咪说: "${analysisResult.catSays}" 🐱\n\n用猫语心愿APP看看你的猫咪在想什么~`,
         url: 'https://catwish.app' // 未来添加
       });
-
-      if (url) {
-        console.log('分享成功:', url);
-      }
     } catch (error: any) {
       console.error('分享失败:', error);
     }

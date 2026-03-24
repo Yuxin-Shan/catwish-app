@@ -56,7 +56,6 @@ export default function CameraScreen({ navigation, route }: Props) {
       };
 
       setCapturedImage(mockPhoto);
-      console.log('拍照完成:', mockPhoto);
     } catch (error: any) {
       Alert.alert('拍照失败', error.message || '无法访问相机,请检查权限设置');
     } finally {
@@ -77,7 +76,6 @@ export default function CameraScreen({ navigation, route }: Props) {
       };
 
       setCapturedImage(mockPhoto);
-      console.log('相册选择完成:', mockPhoto);
     } catch (error: any) {
       if (error.message === '用户取消选择') {
         return;
@@ -103,7 +101,6 @@ export default function CameraScreen({ navigation, route }: Props) {
       };
 
       setCapturedImage(croppedPhoto);
-      console.log('裁剪完成:', croppedPhoto);
     } catch (error: any) {
       Alert.alert('裁剪失败', error.message || '无法裁剪图片');
     } finally {

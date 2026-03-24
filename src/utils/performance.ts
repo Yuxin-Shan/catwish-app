@@ -76,13 +76,6 @@ export function usePerformanceMonitor(componentName: string) {
 
     const currentTime = Date.now();
     const mountDuration = currentTime - mountTimeRef.current;
-
-    if (process.env.NODE_ENV === 'development') {
-      console.log(
-        `[Performance] ${componentName} - Render #${renderCountRef.current}, ` +
-        `Mount: ${mountDuration}ms`
-      );
-    }
   });
 
   const getReport = useCallback(() => {

@@ -39,7 +39,6 @@ export class AIService {
       case 'mock':
         return new MockProvider();
       default:
-        console.warn(`Unknown provider: ${providerName}, using mock`);
         return new MockProvider();
     }
   }
@@ -79,7 +78,6 @@ export class AIService {
 
       // 尝试降级到Mock
       if (this.config.currentProvider !== 'mock') {
-        console.log('降级到Mock服务');
         const mockProvider = new MockProvider();
         return await mockProvider.analyzeImage(imageUri);
       }
@@ -92,7 +90,6 @@ export class AIService {
    * 切换AI提供者 (无需重启)
    */
   async switchProvider(providerName: string): Promise<void> {
-    console.log(`切换AI提供者: ${this.config.currentProvider} → ${providerName}`);
     this.config.currentProvider = providerName as any;
     this.provider = this.createProvider(providerName);
   }
@@ -140,7 +137,6 @@ export class AIService {
   private async compressImage(imageUri: string): Promise<string> {
     // TODO: 实现图片压缩
     // 可以使用 react-native-image-resizer
-    console.log('图片压缩:', imageUri, '→', COMPRESSION_CONFIG);
     return imageUri; // 暂时返回原图
   }
 

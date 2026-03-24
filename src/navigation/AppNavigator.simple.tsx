@@ -17,7 +17,7 @@ function SimpleHomeScreen({ navigation }: any) {
 
       <TouchableOpacity
         style={styles.card}
-        onPress={() => console.log('相机按钮')}
+        onPress={() => {}}
       >
         <Text style={styles.cardTitle}>📷 拍照解读</Text>
         <Text style={styles.cardDesc}>AI识别猫咪情绪</Text>
@@ -25,7 +25,7 @@ function SimpleHomeScreen({ navigation }: any) {
 
       <TouchableOpacity
         style={styles.card}
-        onPress={() => console.log('相册按钮')}
+        onPress={() => {}}
       >
         <Text style={styles.cardTitle}>🖼️ 从相册选择</Text>
         <Text style={styles.cardDesc}>选择猫咪照片</Text>

@@ -32,7 +32,6 @@ export class MemeGenerator {
    */
   async generateMeme(config: MemeConfig, viewShotRef: any): Promise<MemeResult> {
     try {
-      console.log('🎨 开始生成表情包:', config);
 
       // 使用ViewShot截图
       const uri = await viewShotRef.current.capture({
@@ -41,8 +40,6 @@ export class MemeGenerator {
         width: 640,
         height: 640
       });
-
-      console.log('✅ 表情包生成成功:', uri);
 
       return {
         uri,
@@ -60,7 +57,6 @@ export class MemeGenerator {
    */
   async saveToGallery(uri: string): Promise<boolean> {
     try {
-      console.log('💾 保存到相册:', uri);
 
       // Android权限检查
       if (Platform.OS === 'android') {
@@ -73,7 +69,6 @@ export class MemeGenerator {
 
       // 保存到相册
       const savedUri = await CameraRoll.save(uri, { type: 'photo' });
-      console.log('✅ 保存成功:', savedUri);
 
       Alert.alert('保存成功', '表情包已保存到相册');
       return true;
@@ -107,13 +102,9 @@ export class MemeGenerator {
           message: shareText
         });
       }
-
-      console.log('✅ 分享成功');
     } catch (error: any) {
-      console.error('❌ 分享失败:', error);
-
       if (error.message?.includes('cancelled')) {
-        console.log('用户取消分享');
+        // 用户取消分享,静默处理
       } else {
         Alert.alert('分享失败', '无法打开分享面板');
       }
@@ -145,7 +136,6 @@ export class MemeGenerator {
    * 批量生成表情包（暂不实现）
    */
   async generateBatch(configs: MemeConfig[]): Promise<MemeResult[]> {
-    console.log(`批量生成 ${configs.length} 个表情包`);
     throw new Error('批量生成功能暂未实现');
   }
 

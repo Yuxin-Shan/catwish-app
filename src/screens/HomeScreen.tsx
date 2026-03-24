@@ -31,7 +31,7 @@ const HomeScreen = ({ navigation }: Props) => {
 
   const handleGalleryPress = useCallback(() => {
     // TODO: 实现相册选择
-    console.log('从相册选择');
+    // 功能待实现
   }, []);
 
   const handleSeeAllPress = useCallback(() => {
