@@ -2,10 +2,10 @@
 /**
  * 表情包编辑器
  * 核心差异化功能
- * 完整实现: UI + 生成 + 保存 + 分享
+ * 完整实现: UI + 真实生成 + 保存 + 分享
  */
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   View,
   Text,
@@ -15,10 +15,12 @@ import {
   TextInput,
   Alert,
   ActivityIndicator,
-  Modal
+  Modal,
+  Image
 } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import ViewShot from 'react-native-view-shot';
 
 import { Colors, Typography, Spacing, BorderRadius, Shadow } from '../constants/theme';
 import { RootStackParamList } from '../types/navigation';
@@ -40,6 +42,9 @@ interface Props {
 export default function MemeEditorScreen({ navigation, route }: Props) {
   const { imageUri, analysisResult } = route.params;
 
+  // ViewShot引用
+  const viewShotRef = useRef<any>(null);
+
   // 状态
   const [selectedFilter, setSelectedFilter] = useState<'cute' | 'funny' | 'healing'>('cute');
   const [selectedStickers, setSelectedStickers] = useState<string[]>([]);
@@ -49,9 +54,9 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const filters = [
-    { id: 'cute', label: '可爱', emoji: '🌸' },
-    { id: 'funny', label: '搞笑', emoji: '😂' },
-    { id: 'healing', label: '治愈', emoji: '💫' }
+    { id: 'cute' as const, label: '可爱', emoji: '🌸' },
+    { id: 'funny' as const, label: '搞笑', emoji: '😂' },
+    { id: 'healing' as const, label: '治愈', emoji: '💫' }
   ];
 
   const stickers = {
@@ -68,7 +73,7 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
     }
   };
 
-  // 生成表情包
+  // 生成表情包（使用ViewShot）
   const handleGenerate = async () => {
     if (!memeText.trim()) {
       Alert.alert('提示', '请输入表情包文字');
@@ -84,13 +89,14 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
         filter: selectedFilter
       };
 
-      const result = await memeGenerator.generateMeme(config);
+      // 使用ViewShot生成真实图片
+      const result = await memeGenerator.generateMeme(config, viewShotRef);
       setGeneratedMeme(result.uri);
       setShowSuccessModal(true);
-      console.log('表情包生成成功:', result);
-    } catch (error) {
-      console.error('生成失败:', error);
-      Alert.alert('生成失败', '无法生成表情包,请重试');
+      console.log('✅ 表情包生成成功:', result);
+    } catch (error: any) {
+      console.error('❌ 生成失败:', error);
+      Alert.alert('生成失败', error.message || '无法生成表情包，请重试');
     } finally {
       setLoading(false);
     }
@@ -149,28 +155,70 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        {/* 预览区域 */}
+        {/* 预览区域 - 使用ViewShot包裹 */}
         <View style={styles.previewContainer}>
-          <View style={[styles.preview, generatedMeme && styles.previewGenerated]}>
-            <Text style={styles.previewEmoji}>🐱</Text>
-            {selectedStickers.length > 0 && (
-              <View style={styles.stickerPreview}>
-                {selectedStickers.map((sticker, index) => (
-                  <Text key={index} style={styles.previewSticker}>{sticker}</Text>
-                ))}
-              </View>
-            )}
-            {memeText && (
-              <View style={styles.textPreview}>
-                <Text style={styles.previewText}>{memeText}</Text>
-              </View>
-            )}
-            {generatedMeme && (
-              <View style={styles.generatedBadge}>
-                <Text style={styles.generatedBadgeText}>✓ 已生成</Text>
-              </View>
-            )}
-          </View>
+          <ViewShot
+            ref={viewShotRef}
+            options={{
+              format: 'png',
+              quality: 1.0,
+              width: 640,
+              height: 640
+            }}
+            style={styles.viewShotContainer}
+          >
+            <View style={[styles.preview, generatedMeme && styles.previewGenerated]}>
+              {/* 猫咪图片 */}
+              <Image
+                source={{ uri: imageUri }}
+                style={styles.catImage}
+                resizeMode="cover"
+              />
+
+              {/* 滤镜叠加层 */}
+              <View style={[
+                styles.filterOverlay,
+                { backgroundColor: memeGenerator.getFilterStyle(selectedFilter).overlay }
+              ]} />
+
+              {/* 贴纸层 */}
+              {selectedStickers.map((sticker, index) => (
+                <Text
+                  key={index}
+                  style={[
+                    styles.sticker,
+                    {
+                      top: 80 + index * 70,
+                      left: 40 + (index % 3) * 80
+                    }
+                  ]}
+                >
+                  {sticker}
+                </Text>
+              ))}
+
+              {/* 文字层 */}
+              {memeText && (
+                <View style={styles.textOverlay}>
+                  <Text style={styles.memeText}>{memeText}</Text>
+                </View>
+              )}
+
+              {/* 已生成标记（截图时会被包含） */}
+              {generatedMeme && (
+                <View style={styles.watermark}>
+                  <Text style={styles.watermarkText}>猫语心愿</Text>
+                </View>
+              )}
+            </View>
+          </ViewShot>
+
+          {/* 生成成功标记（UI显示，不包含在截图中） */}
+          {generatedMeme && (
+            <View style={styles.generatedBadge}>
+              <Text style={styles.generatedBadgeText}>✓ 已生成</Text>
+            </View>
+          )}
         </View>
 
         {/* 滤镜选择 */}
@@ -369,14 +417,74 @@ const styles = StyleSheet.create({
 
   // 预览区域
   previewContainer: {
-    marginBottom: Spacing.lg
+    marginBottom: Spacing.lg,
+    position: 'relative'
+  },
+  viewShotContainer: {
+    alignSelf: 'center'
   },
   preview: {
-    aspectRatio: 1,
+    width: 320,
+    height: 320,
     backgroundColor: Colors.background.tertiary,
     borderRadius: BorderRadius.lg,
-    justifyContent: 'center',
-    alignItems: 'center'
+    overflow: 'hidden',
+    position: 'relative'
+  },
+  catImage: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute'
+  },
+  filterOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
+  },
+  sticker: {
+    position: 'absolute',
+    fontSize: 36,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  textOverlay: {
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
+    right: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    paddingHorizontal: 15,
+    paddingVertical: 12,
+    borderRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 3
+  },
+  memeText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: Colors.text.primary,
+    textAlign: 'center'
+  },
+  watermark: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 10
+  },
+  watermarkText: {
+    fontSize: 10,
+    color: Colors.text.secondary
   },
   previewEmoji: {
     fontSize: 80
@@ -400,8 +508,27 @@ const styles = StyleSheet.create({
     borderRadius: BorderRadius.sm
   },
   previewText: {
-    ...Typography.body,
-    color: Colors.text.primary
+    fontSize: 16,
+    color: Colors.text.primary,
+    fontWeight: '600'
+  },
+  previewGenerated: {
+    borderWidth: 3,
+    borderColor: Colors.primary
+  },
+  generatedBadge: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
+    backgroundColor: Colors.primary,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20
+  },
+  generatedBadgeText: {
+    color: Colors.text.inverse,
+    fontSize: 12,
+    fontWeight: 'bold'
   },
 
   // 区块

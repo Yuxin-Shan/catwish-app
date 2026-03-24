@@ -140,7 +140,7 @@ interface AnalysisStepProps {
 
 function AnalysisStep({ step, text }: AnalysisStepProps) {
   const [visible, setVisible] = React.useState(false);
-  const [opacity] = React.useState(0);
+  const opacityAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     const timer1 = setTimeout(() => setVisible(true), step * 500);
@@ -156,9 +156,7 @@ function AnalysisStep({ step, text }: AnalysisStepProps) {
       clearTimeout(timer1);
       clearTimeout(timer2);
     };
-  }, [step]);
-
-  const opacityAnim = useRef(new Animated.Value(0)).current;
+  }, [step, opacityAnim]);
 
   if (!visible) return null;
 

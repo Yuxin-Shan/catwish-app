@@ -7,6 +7,7 @@
 import { AIProvider, AIConfig, AnalysisResult } from './types';
 import { ClaudeProvider } from './providers/ClaudeProvider';
 import { GPT4VProvider } from './providers/GPT4VProvider';
+import { KimiProvider } from './providers/KimiProvider';
 import { MockProvider } from './providers/MockProvider';
 import { DEFAULT_AI_CONFIG } from './config';
 import { COMPRESSION_CONFIG } from './config';
@@ -26,6 +27,8 @@ export class AIService {
    */
   private createProvider(providerName: string): AIProvider {
     switch (providerName) {
+      case 'kimi':
+        return new KimiProvider(this.config.kimi!);
       case 'claude':
         return new ClaudeProvider(this.config.claude!);
       case 'gpt4v':

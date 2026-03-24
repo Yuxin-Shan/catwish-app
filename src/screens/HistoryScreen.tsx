@@ -133,7 +133,7 @@ export default function HistoryScreen({ navigation }: Props) {
     if (days === 0) {
       return '今天 ' + date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
     } else if (days === 1) {
-      return '昨天 ' + date.toLocaleTimeString('zh-CN', hour: '2-digit', minute: '2-digit' });
+      return '昨天 ' + date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
     } else if (days < 7) {
       return `${days}天前`;
     } else {

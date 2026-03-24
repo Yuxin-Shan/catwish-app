@@ -5,13 +5,21 @@
  */
 
 import { AIConfig } from './types';
+import { API_CONFIG } from '../../config/api';
 
 /**
  * AI服务默认配置
  */
 export const DEFAULT_AI_CONFIG: AIConfig = {
-  // 当前使用的提供者 (可通过环境变量覆盖)
-  currentProvider: (process.env.AI_PROVIDER as any) || 'mock',
+  // 当前使用的提供者
+  currentProvider: API_CONFIG.AI_PROVIDER,
+
+  // KIMI K2.5配置（推荐，性价比高）
+  kimi: {
+    apiKey: API_CONFIG.KIMI_API_KEY,
+    model: 'kimi-k2.5',
+    apiUrl: 'https://api.moonshot.cn/v1'
+  },
 
   // Claude 3.5 Sonnet配置
   claude: {

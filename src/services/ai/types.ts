@@ -62,7 +62,14 @@ export interface AIProvider {
  */
 export interface AIConfig {
   // 当前使用的提供者
-  currentProvider: 'claude' | 'gpt4v' | 'custom' | 'mock';
+  currentProvider: 'kimi' | 'claude' | 'gpt4v' | 'custom' | 'mock';
+
+  // KIMI配置
+  kimi?: {
+    apiKey: string;
+    model: string;
+    apiUrl: string;
+  };
 
   // Claude配置
   claude?: {

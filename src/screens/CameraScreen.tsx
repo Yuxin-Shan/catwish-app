@@ -378,7 +378,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     backgroundColor: Colors.background.primary,
     alignItems: 'center',
-    justifyContent: center
+    justifyContent: 'center'
   },
   captureInner: {
     width: 70,

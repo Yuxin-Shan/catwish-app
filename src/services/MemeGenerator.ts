@@ -1,13 +1,12 @@
 // src/services/MemeGenerator.ts
 /**
  * 表情包生成服务
- * 使用View截取方案实现图片合成
+ * 使用ViewShot实现真实的图片合成
  */
 
-import { View, StyleProp, ViewStyle } from 'react-native';
-import ViewShot from 'react-native-view-shot';
+import { View, StyleProp, ViewStyle, Image, Text } from 'react-native';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
-import { Share, Alert, Platform } from 'react-native';
+import { Share, Alert, Platform, PermissionsAndroid } from 'react-native';
 import { Colors } from '../constants/theme';
 
 export interface MemeConfig {
@@ -28,105 +27,154 @@ export interface MemeResult {
  */
 export class MemeGenerator {
   /**
-   * 生成表情包
+   * 生成表情包（真实实现）
+   * 注意：需要在UI层使用ViewShot组件包裹预览区域
    */
-  async generateMeme(config: MemeConfig): Promise<MemeResult> {
-    console.log('生成表情包:', config);
+  async generateMeme(config: MemeConfig, viewShotRef: any): Promise<MemeResult> {
+    try {
+      console.log('🎨 开始生成表情包:', config);
 
-    // 模拟生成过程
-    await this.delay(1500);
+      // 使用ViewShot截图
+      const uri = await viewShotRef.current.capture({
+        format: 'png',
+        quality: 1.0,
+        width: 640,
+        height: 640
+      });
 
-    // Mock: 返回生成的图片URI
-    const result: MemeResult = {
-      uri: `meme://generated/${Date.now()}.png`,
-      width: 640,
-      height: 640
-    };
+      console.log('✅ 表情包生成成功:', uri);
 
-    console.log('表情包生成成功:', result);
-    return result;
+      return {
+        uri,
+        width: 640,
+        height: 640
+      };
+    } catch (error) {
+      console.error('❌ 生成失败:', error);
+      throw new Error('生成表情包失败，请重试');
+    }
   }
 
   /**
-   * 保存表情包到相册
+   * 保存表情包到相册（真实实现）
    */
   async saveToGallery(uri: string): Promise<boolean> {
     try {
-      console.log('保存到相册:', uri);
+      console.log('💾 保存到相册:', uri);
 
-      // Mock: 模拟保存
-      await this.delay(500);
+      // Android权限检查
+      if (Platform.OS === 'android') {
+        const granted = await this.requestStoragePermission();
+        if (!granted) {
+          Alert.alert('权限拒绝', '需要相册权限才能保存图片');
+          return false;
+        }
+      }
 
-      console.log('保存成功');
+      // 保存到相册
+      const savedUri = await CameraRoll.save(uri, { type: 'photo' });
+      console.log('✅ 保存成功:', savedUri);
+
+      Alert.alert('保存成功', '表情包已保存到相册');
       return true;
-    } catch (error) {
-      console.error('保存失败:', error);
+    } catch (error: any) {
+      console.error('❌ 保存失败:', error);
+
+      if (error.message?.includes('permission')) {
+        Alert.alert('权限错误', '请在设置中允许访问相册');
+      } else {
+        Alert.alert('保存失败', error.message || '无法保存到相册');
+      }
+
       return false;
     }
   }
 
   /**
-   * 分享表情包
+   * 分享表情包（真实实现）
    */
   async shareMeme(uri: string, text?: string): Promise<void> {
     try {
       const shareText = text || '快来用猫语心愿APP生成猫咪表情包~ 🐱';
 
-      await Share.share({
-        message: shareText,
-        url: uri // iOS only
-      });
+      if (Platform.OS === 'ios') {
+        await Share.share({
+          message: shareText,
+          url: uri
+        });
+      } else {
+        await Share.share({
+          message: shareText
+        });
+      }
 
-      console.log('分享成功');
-    } catch (error) {
-      console.error('分享失败:', error);
-      throw error;
+      console.log('✅ 分享成功');
+    } catch (error: any) {
+      console.error('❌ 分享失败:', error);
+
+      if (error.message?.includes('cancelled')) {
+        console.log('用户取消分享');
+      } else {
+        Alert.alert('分享失败', '无法打开分享面板');
+      }
     }
   }
 
   /**
-   * 批量生成表情包
+   * 请求Android存储权限
+   */
+  private async requestStoragePermission(): Promise<boolean> {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        {
+          title: '相册权限',
+          message: '需要相册权限来保存表情包',
+          buttonNegative: '取消',
+          buttonPositive: '允许'
+        }
+      );
+      return granted === PermissionsAndroid.RESULTS.GRANTED;
+    } catch (error) {
+      console.error('权限请求失败:', error);
+      return false;
+    }
+  }
+
+  /**
+   * 批量生成表情包（暂不实现）
    */
   async generateBatch(configs: MemeConfig[]): Promise<MemeResult[]> {
     console.log(`批量生成 ${configs.length} 个表情包`);
-
-    const results: MemeResult[] = [];
-
-    for (const config of configs) {
-      const result = await this.generateMeme(config);
-      results.push(result);
-    }
-
-    return results;
+    throw new Error('批量生成功能暂未实现');
   }
 
   /**
-   * 获取滤镜配置
+   * 获取滤镜样式配置
    */
-  getFilterStyle(filter: string): any {
+  getFilterStyle(filter: 'cute' | 'funny' | 'healing') {
     const filters = {
       cute: {
-        overlay: 'rgba(255, 182, 193, 0.1)', // 粉色叠加
-        border: '#FFB6C1'
+        overlay: 'rgba(255, 182, 193, 0.2)',  // 粉色叠加
+        overlayColor: '#FFB6C1',
+        borderColor: '#FFB6C1',
+        tintColor: '#FFE4E1'
       },
       funny: {
-        overlay: 'rgba(255, 215, 0, 0.1)', // 金色叠加
-        border: '#FFD700'
+        overlay: 'rgba(255, 215, 0, 0.15)',    // 金色叠加
+        overlayColor: '#FFD700',
+        borderColor: '#FFD700',
+        tintColor: '#FFF8DC'
       },
       healing: {
-        overlay: 'rgba(135, 206, 235, 0.1)', // 蓝色叠加
-        border: '#87CEEB'
+        overlay: 'rgba(135, 206, 235, 0.15)', // 蓝色叠加
+        overlayColor: '#87CEEB',
+        borderColor: '#87CEEB',
+        tintColor: '#E0F7FF'
       }
     };
 
-    return filters[filter as keyof typeof filters] || filters.cute;
-  }
-
-  /**
-   * 延迟函数
-   */
-  private delay(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return filters[filter] || filters.cute;
   }
 
   /**
@@ -134,7 +182,6 @@ export class MemeGenerator {
    */
   async healthCheck(): Promise<boolean> {
     try {
-      // 简单的健康检查
       return true;
     } catch (error) {
       return false;
@@ -146,7 +193,7 @@ export class MemeGenerator {
    */
   getStats() {
     return {
-      totalGenerated: 0, // 可以从本地存储读取
+      totalGenerated: 0,
       todayGenerated: 0,
       popularFilter: 'cute',
       popularStickers: ['❤️', '✨', '🥺']

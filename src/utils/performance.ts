@@ -106,13 +106,15 @@ export function lazyLoad<T extends React.ComponentType<any>>(
   importFunc: () => Promise<{ default: T }>,
   fallback: React.ComponentType = () => null
 ): React.LazyExoticComponent<T> {
-  return React.lazy(() => importFunc().catch((error) => {
-    console.error('Lazy load error:', error);
-    // 返回一个默认组件或错误组件
-    return {
-      default: () => React.createElement(fallback)
-    } as any;
-  });
+  return React.lazy(() =>
+    importFunc().catch((error) => {
+      console.error('Lazy load error:', error);
+      // 返回一个默认组件或错误组件
+      return {
+        default: () => React.createElement(fallback)
+      } as any;
+    })
+  );
 }
 
 /**

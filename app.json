@@ -14,16 +14,38 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow camera access to take photos of cats"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow access to photo library"
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.catwish.app"
+      "bundleIdentifier": "com.catwish.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses camera to analyze cat emotions"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#FFB6C1",
         "foregroundImage": "./assets/adaptive-icon.png"
       },
-      "package": "com.catwish.app"
+      "package": "com.catwish.app",
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
