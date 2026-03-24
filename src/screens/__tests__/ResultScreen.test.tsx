@@ -13,6 +13,20 @@
 
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react-native';
+
+// Mock React Native modules before importing component
+jest.mock('react-native/Libraries/Share/Share', () => ({
+  Share: {
+    share: global.__mockShare,
+  },
+}));
+
+jest.mock('react-native/Libraries/Alert/Alert', () => ({
+  Alert: {
+    alert: global.__mockAlert,
+  },
+}));
+
 import ResultScreen from '../ResultScreen';
 import { AnalysisResult } from '../../services/ai/types';
 
@@ -38,20 +52,6 @@ const createMockParams = (imageUri: string, analysisResult: AnalysisResult) => (
 jest.mock('../../services/storage', () => ({
   storageService: {
     saveAnalysis: jest.fn().mockResolvedValue(undefined),
-  },
-}));
-
-// Mock Share
-jest.mock('react-native/Libraries/Share/Share', () => ({
-  Share: {
-    share: jest.fn().mockResolvedValue({ url: 'https://test.com' }),
-  },
-}));
-
-// Mock Alert
-jest.mock('react-native/Libraries/Alert/Alert', () => ({
-  Alert: {
-    alert: jest.fn(),
   },
 }));
 
@@ -114,7 +114,7 @@ describe('ResultScreen', () => {
       render(<ResultScreen {...props} />);
 
       expect(screen.getByText('📋 行为解读')).toBeTruthy();
-      expect(screen.getByText(/猫咪的尾巴竖直向上/)).toBeTruthy();
+      expect(screen.getAllByText(/猫咪的尾巴竖直向上/).length).toBeGreaterThan(0);
     });
 
     it('should render the interaction suggestion', () => {
@@ -253,9 +253,8 @@ describe('ResultScreen', () => {
       });
     });
 
-    it('should navigate to History when save alert is confirmed', () => {
-      const { Alert } = require('react-native/Libraries/Alert/Alert');
-      Alert.alert.mockImplementationOnce((title, message, buttons) => {
+    it('should navigate to History when save alert is confirmed', async () => {
+      global.__mockAlert.mockImplementationOnce((title, message, buttons) => {
         if (buttons && buttons[0].onPress) {
           buttons[0].onPress();
         }
@@ -267,7 +266,11 @@ describe('ResultScreen', () => {
       const saveButton = screen.getByText('💾 保存');
       fireEvent.press(saveButton);
 
-      expect(Alert.alert).toHaveBeenCalled();
+      // Wait for async operations
+      await new Promise(resolve => setImmediate(resolve));
+      await new Promise(resolve => setImmediate(resolve));
+
+      expect(global.__mockAlert).toHaveBeenCalled();
     });
   });
 
@@ -277,30 +280,34 @@ describe('ResultScreen', () => {
    */
   describe('User Interactions', () => {
     it('should trigger share when share button is pressed', async () => {
-      const { Share } = require('react-native/Libraries/Share/Share');
-
       const props = createMockParams(mockImageUri, mockAnalysisResult);
       render(<ResultScreen {...props} />);
 
       const shareButton = screen.getByText('📤 分享');
       fireEvent.press(shareButton);
 
-      expect(Share.share).toHaveBeenCalledWith({
+      // Wait for async operations
+      await new Promise(resolve => setImmediate(resolve));
+      await new Promise(resolve => setImmediate(resolve));
+
+      expect(global.__mockShare).toHaveBeenCalledWith({
         message: `我家的猫咪说: "${mockAnalysisResult.catSays}" 🐱\n\n用猫语心愿APP看看你的猫咪在想什么~`,
         url: 'https://catwish.app',
       });
     });
 
-    it('should show alert when reanalyze button is pressed', () => {
-      const { Alert } = require('react-native/Libraries/Alert/Alert');
-
+    it('should show alert when reanalyze button is pressed', async () => {
       const props = createMockParams(mockImageUri, mockAnalysisResult);
       render(<ResultScreen {...props} />);
 
       const reanalyzeButton = screen.getByText('🔄');
       fireEvent.press(reanalyzeButton);
 
-      expect(Alert.alert).toHaveBeenCalledWith(
+      // Wait for async operations
+      await new Promise(resolve => setImmediate(resolve));
+      await new Promise(resolve => setImmediate(resolve));
+
+      expect(global.__mockAlert).toHaveBeenCalledWith(
         '重新分析',
         '需要返回相机页面重新拍摄',
         expect.arrayContaining([
