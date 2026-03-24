@@ -291,7 +291,7 @@ describe('ResultScreen', () => {
       render(<ResultScreen {...props} />);
 
       // The reanalyze button is present (using testID)
-      const reanalyzeButton = screen.getByTestId('reanalyze-button');
+      const reanalyzeButton = screen.getByTestId('right-button');
       expect(reanalyzeButton).toBeTruthy();
     });
   });

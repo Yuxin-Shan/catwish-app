@@ -1,0 +1,287 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScreenHeader 快照测试 应该匹配快照 - 基本版本 1`] = `
+<View
+  style={
+    [
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "minHeight": 100,
+        "paddingBottom": 12,
+        "paddingHorizontal": 16,
+        "paddingTop": 60,
+        "zIndex": 600,
+      },
+      {
+        "backgroundColor": "#FFFFFF",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      {
+        "height": 44,
+        "width": 44,
+      }
+    }
+  />
+  <Text
+    numberOfLines={1}
+    style={
+      [
+        {
+          "flex": 1,
+          "fontSize": 18,
+          "fontWeight": "600",
+          "lineHeight": 26,
+          "marginHorizontal": 12,
+          "textAlign": "center",
+        },
+        {
+          "color": "#333333",
+        },
+      ]
+    }
+  >
+    测试标题
+  </Text>
+  <View
+    style={
+      {
+        "height": 44,
+        "width": 44,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`ScreenHeader 快照测试 应该匹配快照 - 完整版本 1`] = `
+<View
+  style={
+    [
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "minHeight": 100,
+        "paddingBottom": 12,
+        "paddingHorizontal": 16,
+        "paddingTop": 60,
+        "zIndex": 600,
+      },
+      {
+        "backgroundColor": "#FFFFFF",
+      },
+      undefined,
+    ]
+  }
+>
+  <TouchableOpacity
+    accessibilityLabel="返回"
+    accessibilityRole="button"
+    onClick={[MockFunction]}
+    style={
+      {
+        "alignItems": "flex-start",
+        "height": 44,
+        "justifyContent": "center",
+        "width": 44,
+      }
+    }
+    testID="back-button"
+  >
+    <Text
+      testID="back-icon"
+    >
+      Ionicons: arrow-back
+    </Text>
+  </TouchableOpacity>
+  <Text
+    numberOfLines={1}
+    style={
+      [
+        {
+          "flex": 1,
+          "fontSize": 18,
+          "fontWeight": "600",
+          "lineHeight": 26,
+          "marginHorizontal": 12,
+          "textAlign": "center",
+        },
+        {
+          "color": "#333",
+        },
+      ]
+    }
+  >
+    完整标题
+  </Text>
+  <TouchableOpacity
+    accessibilityRole="button"
+    onClick={[MockFunction]}
+    style={
+      {
+        "alignItems": "center",
+        "height": 44,
+        "justifyContent": "center",
+        "width": 44,
+      }
+    }
+    testID="right-button"
+  >
+    <Text
+      testID="right-icon"
+    >
+      Ionicons: refresh
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`ScreenHeader 快照测试 应该匹配快照 - 带右侧按钮 1`] = `
+<View
+  style={
+    [
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "minHeight": 100,
+        "paddingBottom": 12,
+        "paddingHorizontal": 16,
+        "paddingTop": 60,
+        "zIndex": 600,
+      },
+      {
+        "backgroundColor": "#FFFFFF",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      {
+        "height": 44,
+        "width": 44,
+      }
+    }
+  />
+  <Text
+    numberOfLines={1}
+    style={
+      [
+        {
+          "flex": 1,
+          "fontSize": 18,
+          "fontWeight": "600",
+          "lineHeight": 26,
+          "marginHorizontal": 12,
+          "textAlign": "center",
+        },
+        {
+          "color": "#333333",
+        },
+      ]
+    }
+  >
+    测试
+  </Text>
+  <TouchableOpacity
+    accessibilityRole="button"
+    onClick={[MockFunction]}
+    style={
+      {
+        "alignItems": "center",
+        "height": 44,
+        "justifyContent": "center",
+        "width": 44,
+      }
+    }
+    testID="right-button"
+  >
+    <Text
+      testID="right-icon"
+    >
+      Ionicons: settings
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`ScreenHeader 快照测试 应该匹配快照 - 带返回按钮 1`] = `
+<View
+  style={
+    [
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "minHeight": 100,
+        "paddingBottom": 12,
+        "paddingHorizontal": 16,
+        "paddingTop": 60,
+        "zIndex": 600,
+      },
+      {
+        "backgroundColor": "#FFFFFF",
+      },
+      undefined,
+    ]
+  }
+>
+  <TouchableOpacity
+    accessibilityLabel="返回"
+    accessibilityRole="button"
+    onClick={[MockFunction]}
+    style={
+      {
+        "alignItems": "flex-start",
+        "height": 44,
+        "justifyContent": "center",
+        "width": 44,
+      }
+    }
+    testID="back-button"
+  >
+    <Text
+      testID="back-icon"
+    >
+      Ionicons: arrow-back
+    </Text>
+  </TouchableOpacity>
+  <Text
+    numberOfLines={1}
+    style={
+      [
+        {
+          "flex": 1,
+          "fontSize": 18,
+          "fontWeight": "600",
+          "lineHeight": 26,
+          "marginHorizontal": 12,
+          "textAlign": "center",
+        },
+        {
+          "color": "#333333",
+        },
+      ]
+    }
+  >
+    测试
+  </Text>
+  <View
+    style={
+      {
+        "height": 44,
+        "width": 44,
+      }
+    }
+  />
+</View>
+`;

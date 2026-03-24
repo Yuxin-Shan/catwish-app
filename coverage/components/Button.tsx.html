@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68.42% </span>
+                <span class="strong">36.84% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/19</span>
+                <span class='fraction'>7/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.55% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>29/36</span>
+                <span class='fraction'>18/36</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68.42% </span>
+                <span class="strong">36.84% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/19</span>
+                <span class='fraction'>7/19</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -288,38 +288,38 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">46x</span>
-<span class="cline-any cline-yes">46x</span>
+<span class="cline-any cline-yes">42x</span>
+<span class="cline-any cline-yes">42x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">46x</span>
+<span class="cline-any cline-yes">42x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">42x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">46x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">46x</span>
+<span class="cline-any cline-yes">42x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -477,14 +477,14 @@ export const Button: React.FC&lt;ButtonProps&gt; = ({
   const [internalLoading, setInternalLoading] = useState(false);
   const [lastPress, setLastPress] = useState(0);
 &nbsp;
-  const handlePress = useCallback(async () =&gt; {
+  const handlePress = useCallback(<span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
     // 如果禁用或加载中,直接返回
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (disabled || externalLoading || internalLoading) {
+<span class="cstat-no" title="statement not covered" >    if (disabled || externalLoading || internalLoading) {</span>
 <span class="cstat-no" title="statement not covered" >      return;</span>
     }
 &nbsp;
     // 防抖逻辑
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (debounce) {
+<span class="cstat-no" title="statement not covered" >    if (debounce) {</span>
       const now = <span class="cstat-no" title="statement not covered" >Date.now();</span>
 <span class="cstat-no" title="statement not covered" >      if (now - lastPress &lt; debounceMs) {</span>
 <span class="cstat-no" title="statement not covered" >        return;</span>
@@ -493,13 +493,13 @@ export const Button: React.FC&lt;ButtonProps&gt; = ({
     }
 &nbsp;
     // 如果是异步操作,显示loading
-    try {
-      setInternalLoading(true);
-      await onPress();
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >      setInternalLoading(true);</span>
+<span class="cstat-no" title="statement not covered" >      await onPress();</span>
     } catch (error) {
 <span class="cstat-no" title="statement not covered" >      console.error('Button press error:', error);</span>
     } finally {
-      setInternalLoading(false);
+<span class="cstat-no" title="statement not covered" >      setInternalLoading(false);</span>
     }
   }, [disabled, externalLoading, internalLoading, debounce, debounceMs, lastPress, onPress]);
 &nbsp;
@@ -512,14 +512,14 @@ export const Button: React.FC&lt;ButtonProps&gt; = ({
         styles[variant],
         styles[size],
         fullWidth &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >styles.fullWidth,</span>
-        (disabled || isLoading) &amp;&amp; styles.disabled
+        (disabled || isLoading) &amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >styles.disabled</span>
       ]}
       onPress={handlePress}
       disabled={disabled || isLoading}
       activeOpacity={0.8}
     &gt;
       {isLoading ? (
-        &lt;ActivityIndicator color={variant === 'outline' || variant === 'text' ? Colors.primary : Colors.text.inverse} /&gt;
+<span class="branch-0 cbranch-no" title="branch not covered" >        &lt;ActivityIndicator color={variant === 'outline' || variant === 'text' ? Colors.primary : Colors.text.inverse} /&gt;</span>
       ) : (
         &lt;&gt;
           {icon &amp;&amp; &lt;Text style={[styles.icon, (variant === 'outline' || variant === 'text') &amp;&amp; styles.iconColored]}&gt;{icon}&lt;/Text&gt;}
@@ -628,7 +628,7 @@ const styles = StyleSheet.create({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-03-24T15:22:40.890Z
+                at 2026-03-24T15:36:31.587Z
             </div>
         <script src="../prettify.js"></script>
         <script>
