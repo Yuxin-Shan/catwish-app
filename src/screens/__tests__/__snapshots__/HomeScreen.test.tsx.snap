@@ -45,7 +45,9 @@ exports[`HomeScreen Snapshot should match the snapshot 1`] = `
       }
       testID="settings-icon"
     >
-      Ionicons: settings
+      <Text>
+        Ionicons: settings
+      </Text>
     </TouchableOpacity>
   </View>
   <ScrollView
@@ -133,7 +135,9 @@ exports[`HomeScreen Snapshot should match the snapshot 1`] = `
           ]
         }
       >
-        Ionicons: camera
+        <Text>
+          Ionicons: camera
+        </Text>
         <Text
           style={
             {
@@ -172,7 +176,9 @@ exports[`HomeScreen Snapshot should match the snapshot 1`] = `
           ]
         }
       >
-        Ionicons: image
+        <Text>
+          Ionicons: image
+        </Text>
         <Text
           style={
             {

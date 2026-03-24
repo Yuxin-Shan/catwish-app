@@ -123,12 +123,12 @@ export default function ResultScreen({ navigation, route }: Props) {
     <View style={styles.container}>
       {/* 顶部导航 */}
       <View style={styles.navBar}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Ionicons name="arrow-back" size={28} color={Colors.text.primary} />
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton} testID="back-button">
+          <Ionicons name="arrow-back" size={28} color={Colors.text.primary} testID="back-icon" />
         </TouchableOpacity>
         <Text style={styles.navTitle}>解读结果</Text>
-        <TouchableOpacity style={styles.moreButton} onPress={handleReanalyze}>
-          <Ionicons name="refresh" size={24} color={Colors.text.secondary} />
+        <TouchableOpacity style={styles.moreButton} onPress={handleReanalyze} testID="reanalyze-button">
+          <Ionicons name="refresh" size={24} color={Colors.text.secondary} testID="refresh-icon" />
         </TouchableOpacity>
       </View>
 

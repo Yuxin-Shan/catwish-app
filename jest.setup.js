@@ -8,6 +8,21 @@ jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 global.__mockShare = jest.fn().mockResolvedValue({ url: 'https://test.com' });
 global.__mockAlert = jest.fn();
 
+// Mock Share module
+jest.mock('react-native/Libraries/Share/Share', () => ({
+  Share: {
+    share: global.__mockShare,
+    sharedAction: 'sharedAction',
+  },
+}));
+
+// Mock Alert module
+jest.mock('react-native/Libraries/Alert/Alert', () => ({
+  Alert: {
+    alert: global.__mockAlert,
+  },
+}));
+
 // Mock navigation
 jest.mock('@react-navigation/native', () => ({
   ...jest.requireActual('@react-navigation/native'),
