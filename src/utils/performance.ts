@@ -103,9 +103,10 @@ export function lazyLoad<T extends React.ComponentType<any>>(
     importFunc().catch((error) => {
       console.error('Lazy load error:', error);
       // 返回一个默认组件或错误组件
+      // 注意: 这里需要 as any，因为类型系统无法表达错误情况下的默认组件
       return {
-        default: () => React.createElement(fallback)
-      } as any;
+        default: fallback as T
+      } as { default: T };
     })
   );
 }

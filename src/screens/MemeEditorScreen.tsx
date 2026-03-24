@@ -232,7 +232,7 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
                   styles.filterOption,
                   selectedFilter === filter.id && styles.activeFilter
                 ]}
-                onPress={() => setSelectedFilter(filter.id as any)}
+                onPress={() => setSelectedFilter(filter.id)}
                 disabled={loading}
               >
                 <Text style={styles.filterEmoji}>{filter.emoji}</Text>

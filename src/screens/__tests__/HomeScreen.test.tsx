@@ -64,8 +64,8 @@ describe('HomeScreen', () => {
 
     it('should render the settings icon', () => {
       render(<HomeScreen navigation={mockNavigation} />);
-      // Ionicons renders the settings icon
-      const settingsIcon = screen.getByTestId('settings-icon');
+      // ScreenHeader uses right-button testID
+      const settingsIcon = screen.getByTestId('right-button');
       expect(settingsIcon).toBeTruthy();
     });
 

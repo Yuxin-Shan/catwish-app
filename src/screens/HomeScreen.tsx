@@ -16,9 +16,15 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 
 import { Colors, Typography, Spacing, BorderRadius } from '../constants/theme';
-import { RootStackParamList } from '../types/navigation';
+import { RootStackParamList, MainTabParamList } from '../types/navigation';
+import { CompositeNavigationProp } from '@react-navigation/native';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { ScreenHeader } from '../components/ScreenHeader';
 
-type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+type HomeScreenNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<MainTabParamList>,
+  NativeStackNavigationProp<RootStackParamList>
+>;
 
 interface Props {
   navigation: HomeScreenNavigationProp;
@@ -27,7 +33,7 @@ interface Props {
 const HomeScreen = ({ navigation }: Props) => {
   // 使用useCallback缓存函数,避免不必要的重渲染
   const handleCameraPress = useCallback(() => {
-    navigation.navigate('Camera' as any);
+    navigation.navigate('Camera');
   }, [navigation]);
 
   const handleGalleryPress = useCallback(() => {
@@ -36,7 +42,7 @@ const HomeScreen = ({ navigation }: Props) => {
   }, []);
 
   const handleSeeAllPress = useCallback(() => {
-    navigation.navigate('History' as any);
+    navigation.navigate('History');
   }, [navigation]);
 
   // 使用useMemo缓存静态内容
@@ -49,12 +55,12 @@ const HomeScreen = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
       {/* 头部 */}
-      <View style={styles.header}>
-        <Text style={styles.title}>🐱 猫语心愿</Text>
-        <TouchableOpacity style={styles.settingsButton} testID="settings-icon">
-          <Ionicons name="settings" size={24} color={Colors.text.primary} />
-        </TouchableOpacity>
-      </View>
+      <ScreenHeader
+        title="🐱 猫语心愿"
+        rightIcon="settings"
+        onRightPress={() => {}}
+        testID="home-header"
+      />
 
       {/* 主内容区 */}
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -117,27 +123,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background.secondary
-  },
-
-  // 头部
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: Spacing.lg,
-    paddingTop: 60,
-    paddingBottom: Spacing.md,
-    backgroundColor: Colors.background.primary
-  },
-  title: {
-    ...Typography.h2,
-    color: Colors.text.primary
-  },
-  settingsButton: {
-    width: 40,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center'
   },
 
   // 滚动内容

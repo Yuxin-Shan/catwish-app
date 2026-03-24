@@ -12,10 +12,20 @@ import { MockProvider } from './providers/MockProvider';
 import { DEFAULT_AI_CONFIG } from './config';
 import { COMPRESSION_CONFIG } from './config';
 
+/**
+ * 内部使用记录类型
+ */
+interface UsageRecord {
+  date: string;
+  cost: number;
+  success: boolean;
+  timestamp: number;
+}
+
 export class AIService {
   private provider: AIProvider;
   private config: AIConfig;
-  private usage: number[] = []; // 每日使用记录
+  private usage: UsageRecord[] = []; // 每日使用记录
 
   constructor(config: AIConfig = DEFAULT_AI_CONFIG) {
     this.config = config;
@@ -89,8 +99,8 @@ export class AIService {
   /**
    * 切换AI提供者 (无需重启)
    */
-  async switchProvider(providerName: string): Promise<void> {
-    this.config.currentProvider = providerName as any;
+  async switchProvider(providerName: AIConfig['currentProvider']): Promise<void> {
+    this.config.currentProvider = providerName;
     this.provider = this.createProvider(providerName);
   }
 
@@ -113,14 +123,11 @@ export class AIService {
    */
   getDailyUsage(): { count: number; cost: number } {
     const today = new Date().toDateString();
-    const todayUsage = this.usage.filter(u => {
-      const record = u as any;
-      return record.date === today;
-    });
+    const todayUsage = this.usage.filter(u => u.date === today);
 
     return {
       count: todayUsage.length,
-      cost: todayUsage.reduce((sum, u) => sum + (u as any).cost, 0)
+      cost: todayUsage.reduce((sum, u) => sum + u.cost, 0)
     };
   }
 
@@ -153,12 +160,13 @@ export class AIService {
    */
   private recordUsage(cost: number, success: boolean): void {
     const today = new Date().toDateString();
-    this.usage.push({
+    const record: UsageRecord = {
       date: today,
       cost,
       success,
       timestamp: Date.now()
-    } as any);
+    };
+    this.usage.push(record);
   }
 }
 

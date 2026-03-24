@@ -24,6 +24,7 @@ import { RootStackParamList } from '../types/navigation';
 import { AnalysisResult } from '../services/ai/types';
 import { storageService } from '../services/storage';
 import { Button } from '../components/Button';
+import { ScreenHeader } from '../components/ScreenHeader';
 import { getEmotionColor } from '../utils/emotionUtils';
 
 type ResultScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Result'>;
@@ -66,7 +67,7 @@ export default function ResultScreen({ navigation, route }: Props) {
     navigation.navigate('MemeEditor', {
       imageUri,
       analysisResult
-    } as any);
+    });
   };
 
   const handleShare = async () => {
@@ -85,7 +86,7 @@ export default function ResultScreen({ navigation, route }: Props) {
       '保存成功',
       '已保存到历史记录',
       [
-        { text: '查看历史', onPress: () => navigation.navigate('History' as any) },
+        { text: '查看历史', onPress: () => navigation.navigate('MainTabs') },
         { text: '确定', style: 'cancel' }
       ]
     );
@@ -104,15 +105,13 @@ export default function ResultScreen({ navigation, route }: Props) {
   return (
     <View style={styles.container}>
       {/* 顶部导航 */}
-      <View style={styles.navBar}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton} testID="back-button">
-          <Ionicons name="arrow-back" size={28} color={Colors.text.primary} testID="back-icon" />
-        </TouchableOpacity>
-        <Text style={styles.navTitle}>解读结果</Text>
-        <TouchableOpacity style={styles.moreButton} onPress={handleReanalyze} testID="reanalyze-button">
-          <Ionicons name="refresh" size={24} color={Colors.text.secondary} testID="refresh-icon" />
-        </TouchableOpacity>
-      </View>
+      <ScreenHeader
+        title="解读结果"
+        onBack={() => navigation.goBack()}
+        rightIcon="refresh"
+        onRightPress={handleReanalyze}
+        testID="result-header"
+      />
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
         {/* 猫咪照片 */}
@@ -214,33 +213,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background.secondary
   },
 
-  // 导航栏
-  navBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: Spacing.lg,
-    paddingTop: 60,
-    paddingBottom: Spacing.md,
-    backgroundColor: Colors.background.primary
-  },
-  backButton: {
-    width: 44,
-    height: 44,
-    alignItems: 'flex-start',
-    justifyContent: 'center'
-  },
-  navTitle: {
-    ...Typography.bodyLarge,
-    color: Colors.text.primary,
-    fontWeight: '600'
-  },
-  moreButton: {
-    width: 44,
-    height: 44,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
 
   // 滚动内容
   scrollContent: {

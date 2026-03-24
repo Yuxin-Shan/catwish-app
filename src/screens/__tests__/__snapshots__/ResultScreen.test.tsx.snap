@@ -11,18 +11,28 @@ exports[`ResultScreen Snapshot should match the snapshot 1`] = `
 >
   <View
     style={
-      {
-        "alignItems": "center",
-        "backgroundColor": "#FFFFFF",
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "paddingBottom": 12,
-        "paddingHorizontal": 16,
-        "paddingTop": 60,
-      }
+      [
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "minHeight": 100,
+          "paddingBottom": 12,
+          "paddingHorizontal": 16,
+          "paddingTop": 60,
+          "zIndex": 600,
+        },
+        {
+          "backgroundColor": "#FFFFFF",
+        },
+        undefined,
+      ]
     }
+    testID="result-header"
   >
     <TouchableOpacity
+      accessibilityLabel="返回"
+      accessibilityRole="button"
       onClick={[Function]}
       style={
         {
@@ -41,18 +51,27 @@ exports[`ResultScreen Snapshot should match the snapshot 1`] = `
       </Text>
     </TouchableOpacity>
     <Text
+      numberOfLines={1}
       style={
-        {
-          "color": "#333333",
-          "fontSize": 18,
-          "fontWeight": "600",
-          "lineHeight": 26,
-        }
+        [
+          {
+            "flex": 1,
+            "fontSize": 18,
+            "fontWeight": "600",
+            "lineHeight": 26,
+            "marginHorizontal": 12,
+            "textAlign": "center",
+          },
+          {
+            "color": "#333333",
+          },
+        ]
       }
     >
       解读结果
     </Text>
     <TouchableOpacity
+      accessibilityRole="button"
       onClick={[Function]}
       style={
         {
@@ -62,10 +81,10 @@ exports[`ResultScreen Snapshot should match the snapshot 1`] = `
           "width": 44,
         }
       }
-      testID="reanalyze-button"
+      testID="right-button"
     >
       <Text
-        testID="refresh-icon"
+        testID="right-icon"
       >
         Ionicons: refresh
       </Text>

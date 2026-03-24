@@ -65,7 +65,7 @@ export default function AnalysisScreen({ navigation, route }: Props) {
           navigation.replace('Result', {
             imageUri,
             analysisResult: result
-          } as any);
+          });
         }, 500);
 
       } catch (error) {

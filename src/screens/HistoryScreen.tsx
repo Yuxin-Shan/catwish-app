@@ -119,7 +119,7 @@ export default function HistoryScreen({ navigation }: Props) {
   };
 
   const handleRecordPress = (record: AnalysisRecord) => {
-    navigation.navigate('Result' as any, {
+    navigation.navigate('Result', {
       imageUri: record.imageUri,
       analysisResult: record.result
     });

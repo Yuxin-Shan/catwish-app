@@ -3,13 +3,11 @@ import React from 'react';
 
 export const Ionicons = ({
   name,
-  size,
-  color,
   testID,
 }: {
   name: string;
-  size: number;
-  color: string;
+  size?: number;
+  color?: string;
   testID?: string;
 }) => {
   // Return a simple component that renders the icon name
@@ -18,13 +16,11 @@ export const Ionicons = ({
 
 export const MaterialIcons = ({
   name,
-  size,
-  color,
   testID,
 }: {
   name: string;
-  size: number;
-  color: string;
+  size?: number;
+  color?: string;
   testID?: string;
 }) => {
   return React.createElement('Text', { testID }, `MaterialIcons: ${name}`);
