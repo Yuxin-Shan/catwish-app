@@ -13,6 +13,7 @@ import {
   ScrollView
 } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 
 import { Colors, Typography, Spacing, BorderRadius } from '../constants/theme';
 import { RootStackParamList } from '../types/navigation';
@@ -50,8 +51,8 @@ const HomeScreen = ({ navigation }: Props) => {
       {/* 头部 */}
       <View style={styles.header}>
         <Text style={styles.title}>🐱 猫语心愿</Text>
-        <TouchableOpacity style={styles.settingsButton}>
-          <Text style={styles.settingsIcon}>⚙️</Text>
+        <TouchableOpacity style={styles.settingsButton} testID="settings-icon">
+          <Ionicons name="settings" size={24} color={Colors.text.primary} />
         </TouchableOpacity>
       </View>
 
@@ -71,7 +72,7 @@ const HomeScreen = ({ navigation }: Props) => {
             onPress={handleCameraPress}
             activeOpacity={0.8}
           >
-            <Text style={styles.cameraIcon}>📷</Text>
+            <Ionicons name="camera" size={32} color={Colors.text.inverse} />
             <Text style={styles.primaryButtonText}>拍照解读猫咪心情</Text>
           </TouchableOpacity>
 
@@ -80,7 +81,7 @@ const HomeScreen = ({ navigation }: Props) => {
             onPress={handleGalleryPress}
             activeOpacity={0.8}
           >
-            <Text style={styles.galleryIcon}>🖼️</Text>
+            <Ionicons name="image" size={32} color={Colors.text.inverse} />
             <Text style={styles.primaryButtonText}>从相册选择</Text>
           </TouchableOpacity>
         </View>
@@ -138,9 +139,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  settingsIcon: {
-    fontSize: 24
-  },
 
   // 滚动内容
   scrollContent: {
@@ -188,14 +186,6 @@ const styles = StyleSheet.create({
   },
   galleryButton: {
     backgroundColor: Colors.secondary
-  },
-  cameraIcon: {
-    fontSize: 32,
-    marginBottom: Spacing.sm
-  },
-  galleryIcon: {
-    fontSize: 32,
-    marginBottom: Spacing.sm
   },
   primaryButtonText: {
     ...Typography.buttonLarge,

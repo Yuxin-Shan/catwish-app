@@ -64,7 +64,9 @@ describe('HomeScreen', () => {
 
     it('should render the settings icon', () => {
       render(<HomeScreen navigation={mockNavigation} />);
-      expect(screen.getByText('⚙️')).toBeTruthy();
+      // Ionicons renders the settings icon
+      const settingsIcon = screen.getByTestId('settings-icon');
+      expect(settingsIcon).toBeTruthy();
     });
 
     it('should render the recent section title', () => {

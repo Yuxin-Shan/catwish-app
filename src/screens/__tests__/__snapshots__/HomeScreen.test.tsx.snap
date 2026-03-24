@@ -43,16 +43,9 @@ exports[`HomeScreen Snapshot should match the snapshot 1`] = `
           "width": 40,
         }
       }
+      testID="settings-icon"
     >
-      <Text
-        style={
-          {
-            "fontSize": 24,
-          }
-        }
-      >
-        ⚙️
-      </Text>
+      Ionicons: settings
     </TouchableOpacity>
   </View>
   <ScrollView
@@ -140,16 +133,7 @@ exports[`HomeScreen Snapshot should match the snapshot 1`] = `
           ]
         }
       >
-        <Text
-          style={
-            {
-              "fontSize": 32,
-              "marginBottom": 8,
-            }
-          }
-        >
-          📷
-        </Text>
+        Ionicons: camera
         <Text
           style={
             {
@@ -188,16 +172,7 @@ exports[`HomeScreen Snapshot should match the snapshot 1`] = `
           ]
         }
       >
-        <Text
-          style={
-            {
-              "fontSize": 32,
-              "marginBottom": 8,
-            }
-          }
-        >
-          🖼️
-        </Text>
+        Ionicons: image
         <Text
           style={
             {
