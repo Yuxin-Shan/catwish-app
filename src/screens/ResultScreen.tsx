@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 
 import { Colors, Typography, Spacing, BorderRadius, Shadow } from '../constants/theme';
 import { RootStackParamList } from '../types/navigation';
@@ -123,11 +124,11 @@ export default function ResultScreen({ navigation, route }: Props) {
       {/* 顶部导航 */}
       <View style={styles.navBar}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={styles.backIcon}>←</Text>
+          <Ionicons name="arrow-back" size={28} color={Colors.text.primary} />
         </TouchableOpacity>
         <Text style={styles.navTitle}>解读结果</Text>
         <TouchableOpacity style={styles.moreButton} onPress={handleReanalyze}>
-          <Text style={styles.moreIcon}>🔄</Text>
+          <Ionicons name="refresh" size={24} color={Colors.text.secondary} />
         </TouchableOpacity>
       </View>
 
@@ -247,10 +248,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center'
   },
-  backIcon: {
-    fontSize: 28,
-    color: Colors.text.primary
-  },
   navTitle: {
     ...Typography.bodyLarge,
     color: Colors.text.primary,
@@ -261,9 +258,6 @@ const styles = StyleSheet.create({
     height: 44,
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  moreIcon: {
-    fontSize: 24
   },
 
   // 滚动内容

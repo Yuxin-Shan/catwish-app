@@ -33,16 +33,7 @@ exports[`ResultScreen Snapshot should match the snapshot 1`] = `
         }
       }
     >
-      <Text
-        style={
-          {
-            "color": "#333333",
-            "fontSize": 28,
-          }
-        }
-      >
-        ←
-      </Text>
+      Ionicons: arrow-back
     </TouchableOpacity>
     <Text
       style={
@@ -67,15 +58,7 @@ exports[`ResultScreen Snapshot should match the snapshot 1`] = `
         }
       }
     >
-      <Text
-        style={
-          {
-            "fontSize": 24,
-          }
-        }
-      >
-        🔄
-      </Text>
+      Ionicons: refresh
     </TouchableOpacity>
   </View>
   <ScrollView
