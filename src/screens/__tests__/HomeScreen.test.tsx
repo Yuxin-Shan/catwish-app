@@ -34,53 +34,53 @@ describe('HomeScreen', () => {
   describe('Rendering', () => {
     it('should render the app title', () => {
       render(<HomeScreen navigation={mockNavigation} />);
-      expect(screen.getByText('🐱 猫语心愿')).toBeOnTheScreen();
+      expect(screen.getByText('🐱 猫语心愿')).toBeTruthy();
     });
 
     it('should render the illustration emoji', () => {
       render(<HomeScreen navigation={mockNavigation} />);
-      expect(screen.getByText('🐱💬')).toBeOnTheScreen();
+      expect(screen.getByText('🐱💬')).toBeTruthy();
     });
 
     it('should render the main title text', () => {
       render(<HomeScreen navigation={mockNavigation} />);
-      expect(screen.getByText('让猫咪"开口说话"')).toBeOnTheScreen();
+      expect(screen.getByText('让猫咪"开口说话"')).toBeTruthy();
     });
 
     it('should render the subtitle', () => {
       render(<HomeScreen navigation={mockNavigation} />);
-      expect(screen.getByText('AI解读猫咪情绪,生成可爱表情包')).toBeOnTheScreen();
+      expect(screen.getByText('AI解读猫咪情绪,生成可爱表情包')).toBeTruthy();
     });
 
     it('should render the camera button', () => {
       render(<HomeScreen navigation={mockNavigation} />);
-      expect(screen.getByText('拍照解读猫咪心情')).toBeOnTheScreen();
+      expect(screen.getByText('拍照解读猫咪心情')).toBeTruthy();
     });
 
     it('should render the gallery button', () => {
       render(<HomeScreen navigation={mockNavigation} />);
-      expect(screen.getByText('从相册选择')).toBeOnTheScreen();
+      expect(screen.getByText('从相册选择')).toBeTruthy();
     });
 
     it('should render the settings icon', () => {
       render(<HomeScreen navigation={mockNavigation} />);
-      expect(screen.getByText('⚙️')).toBeOnTheScreen();
+      expect(screen.getByText('⚙️')).toBeTruthy();
     });
 
     it('should render the recent section title', () => {
       render(<HomeScreen navigation={mockNavigation} />);
-      expect(screen.getByText('最近记录')).toBeOnTheScreen();
+      expect(screen.getByText('最近记录')).toBeTruthy();
     });
 
     it('should render the see all link', () => {
       render(<HomeScreen navigation={mockNavigation} />);
-      expect(screen.getByText('查看全部 →')).toBeOnTheScreen();
+      expect(screen.getByText('查看全部 →')).toBeTruthy();
     });
 
     it('should render placeholder text when no history', () => {
       render(<HomeScreen navigation={mockNavigation} />);
-      expect(screen.getByText('😿 还没有记录哦')).toBeOnTheScreen();
-      expect(screen.getByText('快来拍第一张照片吧~')).toBeOnTheScreen();
+      expect(screen.getByText('😿 还没有记录哦')).toBeTruthy();
+      expect(screen.getByText('快来拍第一张照片吧~')).toBeTruthy();
     });
   });
 
@@ -145,7 +145,7 @@ describe('HomeScreen', () => {
 
       // Component should not cause issues with same props
       // This is a basic check - more sophisticated checks would use React.render count
-      expect(screen.getByText('🐱 猫语心愿')).toBeOnTheScreen();
+      expect(screen.getByText('🐱 猫语心愿')).toBeTruthy();
     });
   });
 });

@@ -85,60 +85,60 @@ describe('ResultScreen', () => {
       const props = createMockParams(mockImageUri, mockAnalysisResult);
       render(<ResultScreen {...props} />);
 
-      expect(screen.getByText('解读结果')).toBeOnTheScreen();
+      expect(screen.getByText('解读结果')).toBeTruthy();
     });
 
     it('should render the emotion label', () => {
       const props = createMockParams(mockImageUri, mockAnalysisResult);
       render(<ResultScreen {...props} />);
 
-      expect(screen.getByText('😊 开心')).toBeOnTheScreen();
+      expect(screen.getByText('😊 开心')).toBeTruthy();
     });
 
     it('should render the emotion score', () => {
       const props = createMockParams(mockImageUri, mockAnalysisResult);
       render(<ResultScreen {...props} />);
 
-      expect(screen.getByText('85分')).toBeOnTheScreen();
+      expect(screen.getByText('85分')).toBeTruthy();
     });
 
     it('should render the cat says text', () => {
       const props = createMockParams(mockImageUri, mockAnalysisResult);
       render(<ResultScreen {...props} />);
 
-      expect(screen.getByText('主人,我今天玩得很开心!')).toBeOnTheScreen();
+      expect(screen.getByText('主人,我今天玩得很开心!')).toBeTruthy();
     });
 
     it('should render the behavior analysis', () => {
       const props = createMockParams(mockImageUri, mockAnalysisResult);
       render(<ResultScreen {...props} />);
 
-      expect(screen.getByText('📋 行为解读')).toBeOnTheScreen();
-      expect(screen.getByText(/猫咪的尾巴竖直向上/)).toBeOnTheScreen();
+      expect(screen.getByText('📋 行为解读')).toBeTruthy();
+      expect(screen.getByText(/猫咪的尾巴竖直向上/)).toBeTruthy();
     });
 
     it('should render the interaction suggestion', () => {
       const props = createMockParams(mockImageUri, mockAnalysisResult);
       render(<ResultScreen {...props} />);
 
-      expect(screen.getByText('💡 互动建议')).toBeOnTheScreen();
-      expect(screen.getByText(/可以尝试用玩具和猫咪互动/)).toBeOnTheScreen();
+      expect(screen.getByText('💡 互动建议')).toBeTruthy();
+      expect(screen.getByText(/可以尝试用玩具和猫咪互动/)).toBeTruthy();
     });
 
     it('should render the meme button', () => {
       const props = createMockParams(mockImageUri, mockAnalysisResult);
       render(<ResultScreen {...props} />);
 
-      expect(screen.getByText('✨')).toBeOnTheScreen();
-      expect(screen.getByText('生成表情包')).toBeOnTheScreen();
+      expect(screen.getByText('✨')).toBeTruthy();
+      expect(screen.getByText('生成表情包')).toBeTruthy();
     });
 
     it('should render the save and share buttons', () => {
       const props = createMockParams(mockImageUri, mockAnalysisResult);
       render(<ResultScreen {...props} />);
 
-      expect(screen.getByText('💾 保存')).toBeOnTheScreen();
-      expect(screen.getByText('📤 分享')).toBeOnTheScreen();
+      expect(screen.getByText('💾 保存')).toBeTruthy();
+      expect(screen.getByText('📤 分享')).toBeTruthy();
     });
   });
 
@@ -155,7 +155,7 @@ describe('ResultScreen', () => {
       const props = createMockParams(mockImageUri, happyResult);
       render(<ResultScreen {...props} />);
 
-      expect(screen.getByText('😊 非常开心')).toBeOnTheScreen();
+      expect(screen.getByText('😊 非常开心')).toBeTruthy();
     });
 
     it('should render with relaxed emotion color (😌)', () => {
@@ -166,7 +166,7 @@ describe('ResultScreen', () => {
       const props = createMockParams(mockImageUri, relaxedResult);
       render(<ResultScreen {...props} />);
 
-      expect(screen.getByText('😌 放松')).toBeOnTheScreen();
+      expect(screen.getByText('😌 放松')).toBeTruthy();
     });
 
     it('should render with anxious emotion color (😰)', () => {
@@ -177,7 +177,7 @@ describe('ResultScreen', () => {
       const props = createMockParams(mockImageUri, anxiousResult);
       render(<ResultScreen {...props} />);
 
-      expect(screen.getByText('😰 焦虑')).toBeOnTheScreen();
+      expect(screen.getByText('😰 焦虑')).toBeTruthy();
     });
 
     it('should render with angry emotion color (😠)', () => {
@@ -188,7 +188,7 @@ describe('ResultScreen', () => {
       const props = createMockParams(mockImageUri, angryResult);
       render(<ResultScreen {...props} />);
 
-      expect(screen.getByText('😠 生气')).toBeOnTheScreen();
+      expect(screen.getByText('😠 生气')).toBeTruthy();
     });
 
     it('should render with curious emotion color (🤔)', () => {
@@ -199,7 +199,7 @@ describe('ResultScreen', () => {
       const props = createMockParams(mockImageUri, curiousResult);
       render(<ResultScreen {...props} />);
 
-      expect(screen.getByText('🤔 好奇')).toBeOnTheScreen();
+      expect(screen.getByText('🤔 好奇')).toBeTruthy();
     });
 
     it('should render with affectionate emotion color (😽)', () => {
@@ -210,7 +210,7 @@ describe('ResultScreen', () => {
       const props = createMockParams(mockImageUri, affectionateResult);
       render(<ResultScreen {...props} />);
 
-      expect(screen.getByText('😽 亲昵')).toBeOnTheScreen();
+      expect(screen.getByText('😽 亲昵')).toBeTruthy();
     });
 
     it('should default to primary color for unknown emotions', () => {
@@ -221,7 +221,7 @@ describe('ResultScreen', () => {
       const props = createMockParams(mockImageUri, unknownResult);
       render(<ResultScreen {...props} />);
 
-      expect(screen.getByText('🎭 未知情绪')).toBeOnTheScreen();
+      expect(screen.getByText('🎭 未知情绪')).toBeTruthy();
     });
   });
 
