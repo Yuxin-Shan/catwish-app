@@ -21,6 +21,7 @@ import {
 import { StackNavigationProp } from '@react-navigation/stack';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import ViewShot from 'react-native-view-shot';
+import { Ionicons } from '@expo/vector-icons';
 
 import { Colors, Typography, Spacing, BorderRadius, Shadow } from '../constants/theme';
 import { RootStackParamList } from '../types/navigation';
@@ -145,11 +146,11 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
       {/* 顶部导航 */}
       <View style={styles.navBar}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={styles.backIcon}>←</Text>
+          <Ionicons name="arrow-back" size={28} color={Colors.text.primary} />
         </TouchableOpacity>
         <Text style={styles.navTitle}>表情包制作</Text>
         <TouchableOpacity onPress={handleDone} style={styles.doneButton}>
-          <Text style={styles.doneIcon}>✓</Text>
+          <Ionicons name="checkmark" size={24} color={Colors.primary} />
         </TouchableOpacity>
       </View>
 
@@ -388,10 +389,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center'
   },
-  backIcon: {
-    fontSize: 28,
-    color: Colors.text.primary
-  },
   navTitle: {
     ...Typography.bodyLarge,
     color: Colors.text.primary,
@@ -402,11 +399,6 @@ const styles = StyleSheet.create({
     height: 44,
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  doneIcon: {
-    fontSize: 24,
-    color: Colors.primary,
-    fontWeight: '600'
   },
 
   // 滚动内容

@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/47</span>
+                <span class='fraction'>0/43</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/47</span>
+                <span class='fraction'>0/43</span>
             </div>
         
             
@@ -229,11 +229,7 @@
 <a name='L164'></a><a href='#L164'>164</a>
 <a name='L165'></a><a href='#L165'>165</a>
 <a name='L166'></a><a href='#L166'>166</a>
-<a name='L167'></a><a href='#L167'>167</a>
-<a name='L168'></a><a href='#L168'>168</a>
-<a name='L169'></a><a href='#L169'>169</a>
-<a name='L170'></a><a href='#L170'>170</a>
-<a name='L171'></a><a href='#L171'>171</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L167'></a><a href='#L167'>167</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -275,7 +271,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -316,7 +311,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -327,7 +321,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -375,7 +368,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -444,7 +436,6 @@ export class AIService {
       case 'mock':
 <span class="cstat-no" title="statement not covered" >        return new MockProvider();</span>
       default:
-<span class="cstat-no" title="statement not covered" >        console.warn(`Unknown provider: ${providerName}, using mock`);</span>
 <span class="cstat-no" title="statement not covered" >        return new MockProvider();</span>
     }
   }
@@ -484,7 +475,6 @@ export class AIService {
 &nbsp;
       // 尝试降级到Mock
 <span class="cstat-no" title="statement not covered" >      if (this.config.currentProvider !== 'mock') {</span>
-<span class="cstat-no" title="statement not covered" >        console.log('降级到Mock服务');</span>
         const mockProvider = <span class="cstat-no" title="statement not covered" >new MockProvider();</span>
 <span class="cstat-no" title="statement not covered" >        return await mockProvider.analyzeImage(imageUri);</span>
       }
@@ -497,7 +487,6 @@ export class AIService {
    * 切换AI提供者 (无需重启)
    */
 <span class="fstat-no" title="function not covered" >  as</span>ync switchProvider(providerName: string): Promise&lt;void&gt; {
-<span class="cstat-no" title="statement not covered" >    console.log(`切换AI提供者: ${this.config.currentProvider} → ${providerName}`);</span>
 <span class="cstat-no" title="statement not covered" >    this.config.currentProvider = providerName as any;</span>
 <span class="cstat-no" title="statement not covered" >    this.provider = this.createProvider(providerName);</span>
   }
@@ -545,7 +534,6 @@ export class AIService {
 <span class="fstat-no" title="function not covered" >  pr</span>ivate async compressImage(imageUri: string): Promise&lt;string&gt; {
     // TODO: 实现图片压缩
     // 可以使用 react-native-image-resizer
-<span class="cstat-no" title="statement not covered" >    console.log('图片压缩:', imageUri, '→', COMPRESSION_CONFIG);</span>
 <span class="cstat-no" title="statement not covered" >    return imageUri; </span>// 暂时返回原图
   }
 &nbsp;
@@ -580,7 +568,7 @@ export const aiService = <span class="cstat-no" title="statement not covered" >n
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-03-24T15:19:38.944Z
+                at 2026-03-24T15:22:40.890Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

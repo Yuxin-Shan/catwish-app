@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/47</span>
+                <span class='fraction'>0/39</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/47</span>
+                <span class='fraction'>0/39</span>
             </div>
         
             
@@ -257,17 +257,7 @@
 <a name='L192'></a><a href='#L192'>192</a>
 <a name='L193'></a><a href='#L193'>193</a>
 <a name='L194'></a><a href='#L194'>194</a>
-<a name='L195'></a><a href='#L195'>195</a>
-<a name='L196'></a><a href='#L196'>196</a>
-<a name='L197'></a><a href='#L197'>197</a>
-<a name='L198'></a><a href='#L198'>198</a>
-<a name='L199'></a><a href='#L199'>199</a>
-<a name='L200'></a><a href='#L200'>200</a>
-<a name='L201'></a><a href='#L201'>201</a>
-<a name='L202'></a><a href='#L202'>202</a>
-<a name='L203'></a><a href='#L203'>203</a>
-<a name='L204'></a><a href='#L204'>204</a>
-<a name='L205'></a><a href='#L205'>205</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L195'></a><a href='#L195'>195</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -301,7 +291,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -310,8 +299,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -329,7 +316,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -341,7 +327,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -379,10 +364,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -414,7 +395,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -505,7 +485,6 @@ export class MemeGenerator {
    */
 <span class="fstat-no" title="function not covered" >  as</span>ync generateMeme(config: MemeConfig, viewShotRef: any): Promise&lt;MemeResult&gt; {
 <span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >      console.log('🎨 开始生成表情包:', config);</span>
 &nbsp;
       // 使用ViewShot截图
       const uri = <span class="cstat-no" title="statement not covered" >await viewShotRef.current.capture({</span>
@@ -514,8 +493,6 @@ export class MemeGenerator {
         width: 640,
         height: 640
       });
-&nbsp;
-<span class="cstat-no" title="statement not covered" >      console.log('✅ 表情包生成成功:', uri);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      return {</span>
         uri,
@@ -533,7 +510,6 @@ export class MemeGenerator {
    */
 <span class="fstat-no" title="function not covered" >  as</span>ync saveToGallery(uri: string): Promise&lt;boolean&gt; {
 <span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >      console.log('💾 保存到相册:', uri);</span>
 &nbsp;
       // Android权限检查
 <span class="cstat-no" title="statement not covered" >      if (Platform.OS === 'android') {</span>
@@ -546,7 +522,6 @@ export class MemeGenerator {
 &nbsp;
       // 保存到相册
       const savedUri = <span class="cstat-no" title="statement not covered" >await CameraRoll.save(uri, { type: 'photo' });</span>
-<span class="cstat-no" title="statement not covered" >      console.log('✅ 保存成功:', savedUri);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      Alert.alert('保存成功', '表情包已保存到相册');</span>
 <span class="cstat-no" title="statement not covered" >      return true;</span>
@@ -580,13 +555,9 @@ export class MemeGenerator {
           message: shareText
         });
       }
-&nbsp;
-<span class="cstat-no" title="statement not covered" >      console.log('✅ 分享成功');</span>
     } catch (error: any) {
-<span class="cstat-no" title="statement not covered" >      console.error('❌ 分享失败:', error);</span>
-&nbsp;
 <span class="cstat-no" title="statement not covered" >      if (error.message?.includes('cancelled')) {</span>
-<span class="cstat-no" title="statement not covered" >        console.log('用户取消分享');</span>
+        // 用户取消分享,静默处理
       } else {
 <span class="cstat-no" title="statement not covered" >        Alert.alert('分享失败', '无法打开分享面板');</span>
       }
@@ -618,7 +589,6 @@ export class MemeGenerator {
    * 批量生成表情包（暂不实现）
    */
 <span class="fstat-no" title="function not covered" >  as</span>ync generateBatch(configs: MemeConfig[]): Promise&lt;MemeResult[]&gt; {
-<span class="cstat-no" title="statement not covered" >    console.log(`批量生成 ${configs.length} 个表情包`);</span>
 <span class="cstat-no" title="statement not covered" >    throw new Error('批量生成功能暂未实现');</span>
   }
 &nbsp;
@@ -682,7 +652,7 @@ export const memeGenerator = <span class="cstat-no" title="statement not covered
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-03-24T15:19:38.924Z
+                at 2026-03-24T15:22:40.870Z
             </div>
         <script src="../prettify.js"></script>
         <script>

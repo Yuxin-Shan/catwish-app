@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/46</span>
+                <span class='fraction'>0/43</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/42</span>
+                <span class='fraction'>0/39</span>
             </div>
         
             
@@ -484,16 +484,8 @@
 <a name='L419'></a><a href='#L419'>419</a>
 <a name='L420'></a><a href='#L420'>420</a>
 <a name='L421'></a><a href='#L421'>421</a>
-<a name='L422'></a><a href='#L422'>422</a>
-<a name='L423'></a><a href='#L423'>423</a>
-<a name='L424'></a><a href='#L424'>424</a>
-<a name='L425'></a><a href='#L425'>425</a>
-<a name='L426'></a><a href='#L426'>426</a>
-<a name='L427'></a><a href='#L427'>427</a>
-<a name='L428'></a><a href='#L428'>428</a>
-<a name='L429'></a><a href='#L429'>429</a>
-<a name='L430'></a><a href='#L430'>430</a>
-<a name='L431'></a><a href='#L431'>431</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L422'></a><a href='#L422'>422</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -551,7 +543,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -571,7 +562,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -597,7 +587,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -720,13 +709,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -941,6 +923,7 @@ import {
 } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 &nbsp;
 import { Colors, Typography, Spacing } from '../constants/theme';
 import { RootStackParamList } from '../types/navigation';
@@ -981,7 +964,6 @@ export default function <span class="fstat-no" title="function not covered" >Cam
       };
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      setCapturedImage(mockPhoto);</span>
-<span class="cstat-no" title="statement not covered" >      console.log('拍照完成:', mockPhoto);</span>
     } catch (error: any) {
 <span class="cstat-no" title="statement not covered" >      Alert.alert('拍照失败', error.message || '无法访问相机,请检查权限设置');</span>
     } finally {
@@ -1002,7 +984,6 @@ export default function <span class="fstat-no" title="function not covered" >Cam
       };
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      setCapturedImage(mockPhoto);</span>
-<span class="cstat-no" title="statement not covered" >      console.log('相册选择完成:', mockPhoto);</span>
     } catch (error: any) {
 <span class="cstat-no" title="statement not covered" >      if (error.message === '用户取消选择') {</span>
 <span class="cstat-no" title="statement not covered" >        return;</span>
@@ -1028,7 +1009,6 @@ export default function <span class="fstat-no" title="function not covered" >Cam
       };
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      setCapturedImage(croppedPhoto);</span>
-<span class="cstat-no" title="statement not covered" >      console.log('裁剪完成:', croppedPhoto);</span>
     } catch (error: any) {
 <span class="cstat-no" title="statement not covered" >      Alert.alert('裁剪失败', error.message || '无法裁剪图片');</span>
     } finally {
@@ -1057,11 +1037,11 @@ export default function <span class="fstat-no" title="function not covered" >Cam
       {/* 顶部栏 */}
       &lt;View style={styles.topBar}&gt;
         &lt;TouchableOpacity onPress={handleBack} style={styles.backButton}&gt;
-          &lt;Text style={styles.backIcon}&gt;←&lt;/Text&gt;
+          &lt;Ionicons name="arrow-back" size={28} color={Colors.text.inverse} /&gt;
         &lt;/TouchableOpacity&gt;
         &lt;Text style={styles.title}&gt;拍照解读&lt;/Text&gt;
         &lt;TouchableOpacity style={styles.flashButton}&gt;
-          &lt;Text style={styles.flashIcon}&gt;⚡&lt;/Text&gt;
+          &lt;Ionicons name="flash" size={24} color={Colors.text.inverse} /&gt;
         &lt;/TouchableOpacity&gt;
       &lt;/View&gt;
 &nbsp;
@@ -1170,10 +1150,6 @@ const styles = <span class="cstat-no" title="statement not covered" >StyleSheet.
     alignItems: 'flex-start',
     justifyContent: 'center'
   },
-  backIcon: {
-    fontSize: 28,
-    color: Colors.text.inverse
-  },
   title: {
     ...Typography.bodyLarge,
     color: Colors.text.inverse,
@@ -1184,9 +1160,6 @@ const styles = <span class="cstat-no" title="statement not covered" >StyleSheet.
     height: 44,
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  flashIcon: {
-    fontSize: 24
   },
 &nbsp;
   // 相机取景框
@@ -1360,7 +1333,7 @@ const styles = <span class="cstat-no" title="statement not covered" >StyleSheet.
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-03-24T15:19:38.924Z
+                at 2026-03-24T15:22:40.870Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 
 import { Colors, Typography, Spacing } from '../constants/theme';
 import { RootStackParamList } from '../types/navigation';
@@ -129,11 +130,11 @@ export default function CameraScreen({ navigation, route }: Props) {
       {/* 顶部栏 */}
       <View style={styles.topBar}>
         <TouchableOpacity onPress={handleBack} style={styles.backButton}>
-          <Text style={styles.backIcon}>←</Text>
+          <Ionicons name="arrow-back" size={28} color={Colors.text.inverse} />
         </TouchableOpacity>
         <Text style={styles.title}>拍照解读</Text>
         <TouchableOpacity style={styles.flashButton}>
-          <Text style={styles.flashIcon}>⚡</Text>
+          <Ionicons name="flash" size={24} color={Colors.text.inverse} />
         </TouchableOpacity>
       </View>
 
@@ -242,10 +243,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center'
   },
-  backIcon: {
-    fontSize: 28,
-    color: Colors.text.inverse
-  },
   title: {
     ...Typography.bodyLarge,
     color: Colors.text.inverse,
@@ -256,9 +253,6 @@ const styles = StyleSheet.create({
     height: 44,
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  flashIcon: {
-    fontSize: 24
   },
 
   // 相机取景框
