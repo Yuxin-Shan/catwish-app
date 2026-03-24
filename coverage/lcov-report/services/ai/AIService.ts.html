@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/43</span>
+                <span class='fraction'>0/42</span>
             </div>
         
             
@@ -229,7 +229,25 @@
 <a name='L164'></a><a href='#L164'>164</a>
 <a name='L165'></a><a href='#L165'>165</a>
 <a name='L166'></a><a href='#L166'>166</a>
-<a name='L167'></a><a href='#L167'>167</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -345,9 +363,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -390,6 +405,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -409,10 +425,20 @@ import { MockProvider } from './providers/MockProvider';
 import { DEFAULT_AI_CONFIG } from './config';
 import { COMPRESSION_CONFIG } from './config';
 &nbsp;
+/**
+ * 内部使用记录类型
+ */
+interface UsageRecord {
+  date: string;
+  cost: number;
+  success: boolean;
+  timestamp: number;
+}
+&nbsp;
 export class AIService {
   private provider: AIProvider;
   private config: AIConfig;
-  private usage: number[] = <span class="cstat-no" title="statement not covered" >[];</span> // 每日使用记录
+  private usage: UsageRecord[] = <span class="cstat-no" title="statement not covered" >[];</span> // 每日使用记录
 &nbsp;
 <span class="fstat-no" title="function not covered" >  co</span>nstructor(config: AIConfig = <span class="branch-0 cbranch-no" title="branch not covered" >DEFAULT_AI_CONFIG)</span> {
 <span class="cstat-no" title="statement not covered" >    this.config = config;</span>
@@ -486,8 +512,8 @@ export class AIService {
   /**
    * 切换AI提供者 (无需重启)
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync switchProvider(providerName: string): Promise&lt;void&gt; {
-<span class="cstat-no" title="statement not covered" >    this.config.currentProvider = providerName as any;</span>
+<span class="fstat-no" title="function not covered" >  as</span>ync switchProvider(providerName: AIConfig['currentProvider']): Promise&lt;void&gt; {
+<span class="cstat-no" title="statement not covered" >    this.config.currentProvider = providerName;</span>
 <span class="cstat-no" title="statement not covered" >    this.provider = this.createProvider(providerName);</span>
   }
 &nbsp;
@@ -510,14 +536,11 @@ export class AIService {
    */
 <span class="fstat-no" title="function not covered" >  ge</span>tDailyUsage(): { count: number; cost: number } {
     const today = <span class="cstat-no" title="statement not covered" >new Date().toDateString();</span>
-    const todayUsage = <span class="cstat-no" title="statement not covered" >this.usage.filter(<span class="fstat-no" title="function not covered" >u </span>=&gt; {</span>
-      const record = <span class="cstat-no" title="statement not covered" >u as any;</span>
-<span class="cstat-no" title="statement not covered" >      return record.date === today;</span>
-    });
+    const todayUsage = <span class="cstat-no" title="statement not covered" >this.usage.filter(<span class="fstat-no" title="function not covered" >u </span>=&gt; <span class="cstat-no" title="statement not covered" >u.date === today)</span>;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return {</span>
       count: todayUsage.length,
-      cost: todayUsage.reduce(<span class="fstat-no" title="function not covered" >(s</span>um, u) =&gt; <span class="cstat-no" title="statement not covered" >sum + (u as any).cost,</span> 0)
+      cost: todayUsage.reduce(<span class="fstat-no" title="function not covered" >(s</span>um, u) =&gt; <span class="cstat-no" title="statement not covered" >sum + u.cost,</span> 0)
     };
   }
 &nbsp;
@@ -550,12 +573,13 @@ export class AIService {
    */
 <span class="fstat-no" title="function not covered" >  pr</span>ivate recordUsage(cost: number, success: boolean): void {
     const today = <span class="cstat-no" title="statement not covered" >new Date().toDateString();</span>
-<span class="cstat-no" title="statement not covered" >    this.usage.push({</span>
+    const record: UsageRecord = <span class="cstat-no" title="statement not covered" >{</span>
       date: today,
       cost,
       success,
       timestamp: Date.now()
-    } as any);
+    };
+<span class="cstat-no" title="statement not covered" >    this.usage.push(record);</span>
   }
 }
 &nbsp;
@@ -568,7 +592,7 @@ export const aiService = <span class="cstat-no" title="statement not covered" >n
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-03-24T15:36:31.563Z
+                at 2026-03-24T15:41:58.727Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

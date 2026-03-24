@@ -444,35 +444,8 @@
 <a name='L379'></a><a href='#L379'>379</a>
 <a name='L380'></a><a href='#L380'>380</a>
 <a name='L381'></a><a href='#L381'>381</a>
-<a name='L382'></a><a href='#L382'>382</a>
-<a name='L383'></a><a href='#L383'>383</a>
-<a name='L384'></a><a href='#L384'>384</a>
-<a name='L385'></a><a href='#L385'>385</a>
-<a name='L386'></a><a href='#L386'>386</a>
-<a name='L387'></a><a href='#L387'>387</a>
-<a name='L388'></a><a href='#L388'>388</a>
-<a name='L389'></a><a href='#L389'>389</a>
-<a name='L390'></a><a href='#L390'>390</a>
-<a name='L391'></a><a href='#L391'>391</a>
-<a name='L392'></a><a href='#L392'>392</a>
-<a name='L393'></a><a href='#L393'>393</a>
-<a name='L394'></a><a href='#L394'>394</a>
-<a name='L395'></a><a href='#L395'>395</a>
-<a name='L396'></a><a href='#L396'>396</a>
-<a name='L397'></a><a href='#L397'>397</a>
-<a name='L398'></a><a href='#L398'>398</a>
-<a name='L399'></a><a href='#L399'>399</a>
-<a name='L400'></a><a href='#L400'>400</a>
-<a name='L401'></a><a href='#L401'>401</a>
-<a name='L402'></a><a href='#L402'>402</a>
-<a name='L403'></a><a href='#L403'>403</a>
-<a name='L404'></a><a href='#L404'>404</a>
-<a name='L405'></a><a href='#L405'>405</a>
-<a name='L406'></a><a href='#L406'>406</a>
-<a name='L407'></a><a href='#L407'>407</a>
-<a name='L408'></a><a href='#L408'>408</a>
-<a name='L409'></a><a href='#L409'>409</a>
-<a name='L410'></a><a href='#L410'>410</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L382'></a><a href='#L382'>382</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -579,6 +552,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -679,37 +653,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -907,6 +851,7 @@ import { RootStackParamList } from '../types/navigation';
 import { AnalysisResult } from '../services/ai/types';
 import { storageService } from '../services/storage';
 import { Button } from '../components/Button';
+import { ScreenHeader } from '../components/ScreenHeader';
 import { getEmotionColor } from '../utils/emotionUtils';
 &nbsp;
 type ResultScreenNavigationProp = StackNavigationProp&lt;RootStackParamList, 'Result'&gt;;
@@ -949,7 +894,7 @@ export default function ResultScreen({ navigation, route }: Props) {
     navigation.navigate('MemeEditor', {
       imageUri,
       analysisResult
-    } as any);
+    });
   };
 &nbsp;
   const handleShare = <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
@@ -968,7 +913,7 @@ export default function ResultScreen({ navigation, route }: Props) {
       '保存成功',
       '已保存到历史记录',
       [
-        { text: '查看历史', onPress: <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >navigation.navigate('History' as any) </span>},
+        { text: '查看历史', onPress: <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >navigation.navigate('MainTabs') </span>},
         { text: '确定', style: 'cancel' }
       ]
     );
@@ -987,15 +932,13 @@ export default function ResultScreen({ navigation, route }: Props) {
   return (
     &lt;View style={styles.container}&gt;
       {/* 顶部导航 */}
-      &lt;View style={styles.navBar}&gt;
-        &lt;TouchableOpacity onPress={() =&gt; navigation.goBack()} style={styles.backButton} testID="back-button"&gt;
-          &lt;Ionicons name="arrow-back" size={28} color={Colors.text.primary} testID="back-icon" /&gt;
-        &lt;/TouchableOpacity&gt;
-        &lt;Text style={styles.navTitle}&gt;解读结果&lt;/Text&gt;
-        &lt;TouchableOpacity style={styles.moreButton} onPress={handleReanalyze} testID="reanalyze-button"&gt;
-          &lt;Ionicons name="refresh" size={24} color={Colors.text.secondary} testID="refresh-icon" /&gt;
-        &lt;/TouchableOpacity&gt;
-      &lt;/View&gt;
+      &lt;ScreenHeader
+        title="解读结果"
+        onBack={() =&gt; navigation.goBack()}
+        rightIcon="refresh"
+        onRightPress={handleReanalyze}
+        testID="result-header"
+      /&gt;
 &nbsp;
       &lt;ScrollView contentContainerStyle={styles.scrollContent}&gt;
         {/* 猫咪照片 */}
@@ -1097,33 +1040,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background.secondary
   },
 &nbsp;
-  // 导航栏
-  navBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: Spacing.lg,
-    paddingTop: 60,
-    paddingBottom: Spacing.md,
-    backgroundColor: Colors.background.primary
-  },
-  backButton: {
-    width: 44,
-    height: 44,
-    alignItems: 'flex-start',
-    justifyContent: 'center'
-  },
-  navTitle: {
-    ...Typography.bodyLarge,
-    color: Colors.text.primary,
-    fontWeight: '600'
-  },
-  moreButton: {
-    width: 44,
-    height: 44,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
 &nbsp;
   // 滚动内容
   scrollContent: {
@@ -1297,7 +1213,7 @@ const styles = StyleSheet.create({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-03-24T15:36:31.563Z
+                at 2026-03-24T15:41:58.727Z
             </div>
         <script src="../prettify.js"></script>
         <script>

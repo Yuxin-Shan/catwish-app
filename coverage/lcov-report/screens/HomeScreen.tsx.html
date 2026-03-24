@@ -37,9 +37,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
@@ -280,22 +280,13 @@
 <a name='L215'></a><a href='#L215'>215</a>
 <a name='L216'></a><a href='#L216'>216</a>
 <a name='L217'></a><a href='#L217'>217</a>
-<a name='L218'></a><a href='#L218'>218</a>
-<a name='L219'></a><a href='#L219'>219</a>
-<a name='L220'></a><a href='#L220'>220</a>
-<a name='L221'></a><a href='#L221'>221</a>
-<a name='L222'></a><a href='#L222'>222</a>
-<a name='L223'></a><a href='#L223'>223</a>
-<a name='L224'></a><a href='#L224'>224</a>
-<a name='L225'></a><a href='#L225'>225</a>
-<a name='L226'></a><a href='#L226'>226</a>
-<a name='L227'></a><a href='#L227'>227</a>
-<a name='L228'></a><a href='#L228'>228</a>
-<a name='L229'></a><a href='#L229'>229</a>
-<a name='L230'></a><a href='#L230'>230</a>
-<a name='L231'></a><a href='#L231'>231</a>
-<a name='L232'></a><a href='#L232'>232</a>
-<a name='L233'></a><a href='#L233'>233</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L218'></a><a href='#L218'>218</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -411,27 +402,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -545,9 +515,15 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 &nbsp;
 import { Colors, Typography, Spacing, BorderRadius } from '../constants/theme';
-import { RootStackParamList } from '../types/navigation';
+import { RootStackParamList, MainTabParamList } from '../types/navigation';
+import { CompositeNavigationProp } from '@react-navigation/native';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { ScreenHeader } from '../components/ScreenHeader';
 &nbsp;
-type HomeScreenNavigationProp = NativeStackNavigationProp&lt;RootStackParamList&gt;;
+type HomeScreenNavigationProp = CompositeNavigationProp&lt;
+  BottomTabNavigationProp&lt;MainTabParamList&gt;,
+  NativeStackNavigationProp&lt;RootStackParamList&gt;
+&gt;;
 &nbsp;
 interface Props {
   navigation: HomeScreenNavigationProp;
@@ -556,7 +532,7 @@ interface Props {
 const HomeScreen = ({ navigation }: Props) =&gt; {
   // 使用useCallback缓存函数,避免不必要的重渲染
   const handleCameraPress = useCallback(() =&gt; {
-    navigation.navigate('Camera' as any);
+    navigation.navigate('Camera');
   }, [navigation]);
 &nbsp;
   const handleGalleryPress = useCallback(() =&gt; {
@@ -565,7 +541,7 @@ const HomeScreen = ({ navigation }: Props) =&gt; {
   }, []);
 &nbsp;
   const handleSeeAllPress = useCallback(() =&gt; {
-    navigation.navigate('History' as any);
+    navigation.navigate('History');
   }, [navigation]);
 &nbsp;
   // 使用useMemo缓存静态内容
@@ -578,12 +554,12 @@ const HomeScreen = ({ navigation }: Props) =&gt; {
   return (
     &lt;View style={styles.container}&gt;
       {/* 头部 */}
-      &lt;View style={styles.header}&gt;
-        &lt;Text style={styles.title}&gt;🐱 猫语心愿&lt;/Text&gt;
-        &lt;TouchableOpacity style={styles.settingsButton} testID="settings-icon"&gt;
-          &lt;Ionicons name="settings" size={24} color={Colors.text.primary} /&gt;
-        &lt;/TouchableOpacity&gt;
-      &lt;/View&gt;
+      &lt;ScreenHeader
+        title="🐱 猫语心愿"
+        rightIcon="settings"
+        onRightPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; {}}
+        testID="home-header"
+      /&gt;
 &nbsp;
       {/* 主内容区 */}
       &lt;ScrollView contentContainerStyle={styles.scrollContent}&gt;
@@ -646,27 +622,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background.secondary
-  },
-&nbsp;
-  // 头部
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: Spacing.lg,
-    paddingTop: 60,
-    paddingBottom: Spacing.md,
-    backgroundColor: Colors.background.primary
-  },
-  title: {
-    ...Typography.h2,
-    color: Colors.text.primary
-  },
-  settingsButton: {
-    width: 40,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center'
   },
 &nbsp;
   // 滚动内容
@@ -766,7 +721,7 @@ const styles = StyleSheet.create({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-03-24T15:36:31.563Z
+                at 2026-03-24T15:41:58.727Z
             </div>
         <script src="../prettify.js"></script>
         <script>
