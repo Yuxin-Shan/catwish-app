@@ -24,6 +24,7 @@ import { RootStackParamList } from '../types/navigation';
 import { AnalysisResult } from '../services/ai/types';
 import { storageService } from '../services/storage';
 import { Button } from '../components/Button';
+import { getEmotionColor } from '../utils/emotionUtils';
 
 type ResultScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Result'>;
 
@@ -98,25 +99,6 @@ export default function ResultScreen({ navigation, route }: Props) {
         { text: '确定', style: 'cancel' }
       ]
     );
-  };
-
-  // 获取情绪颜色
-  const getEmotionColor = (emotion: string) => {
-    const emotionColors: Record<string, string> = {
-      '😊': Colors.emotions.happy,
-      '😌': Colors.emotions.relaxed,
-      '😰': Colors.emotions.anxious,
-      '😠': Colors.emotions.angry,
-      '🤔': Colors.emotions.curious,
-      '😽': Colors.emotions.affectionate
-    };
-
-    for (const [key, color] of Object.entries(emotionColors)) {
-      if (emotion.includes(key)) {
-        return color;
-      }
-    }
-    return Colors.primary;
   };
 
   return (
