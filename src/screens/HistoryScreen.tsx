@@ -15,6 +15,7 @@ import {
   TouchableOpacity,
   Alert
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import { Colors, Typography, Spacing, BorderRadius, Shadow } from '../constants/theme';
 import { storageService, AnalysisRecord } from '../services/storage';
@@ -201,7 +202,7 @@ export default function HistoryScreen({ navigation }: Props) {
       ) : filteredRecords.length === 0 ? (
         <ScrollView style={styles.list} contentContainerStyle={styles.listContent}>
           <View style={styles.emptyState}>
-            <Text style={styles.emptyEmoji}>😿</Text>
+            <Ionicons name="document-text-outline" size={64} color={Colors.text.tertiary} />
             <Text style={styles.emptyText}>还没有记录哦</Text>
             <Text style={styles.emptySubtext}>快去拍第一张照片吧~</Text>
           </View>

@@ -308,14 +308,14 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
               style={styles.actionButton}
               onPress={handleSaveToGallery}
             >
-              <Text style={styles.actionButtonIcon}>💾</Text>
+              <Ionicons name="download-outline" size={24} color={Colors.text.primary} />
               <Text style={styles.actionButtonText}>保存</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.actionButton}
               onPress={handleShare}
             >
-              <Text style={styles.actionButtonIcon}>📤</Text>
+              <Ionicons name="share-social-outline" size={24} color={Colors.text.primary} />
               <Text style={styles.actionButtonText}>分享</Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -325,7 +325,7 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
                 setShowSuccessModal(false);
               }}
             >
-              <Text style={styles.actionButtonIcon}>🔄</Text>
+              <Ionicons name="refresh-outline" size={24} color={Colors.text.primary} />
               <Text style={styles.actionButtonText}>重新制作</Text>
             </TouchableOpacity>
           </View>
@@ -341,7 +341,7 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalIcon}>🎉</Text>
+            <Ionicons name="checkmark-circle" size={64} color={Colors.success} />
             <Text style={styles.modalTitle}>表情包生成成功!</Text>
             <Text style={styles.modalText}>
               已经为你制作了专属表情包

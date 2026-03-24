@@ -142,7 +142,7 @@ export default function CameraScreen({ navigation, route }: Props) {
       <View style={styles.cameraFrame}>
         {capturedImage ? (
           <View style={styles.previewContainer}>
-            <Text style={styles.previewEmoji}>🐱</Text>
+            <Ionicons name="image-outline" size={80} color={Colors.text.secondary} />
             <Text style={styles.previewText}>{capturedImage.uri}</Text>
             <Text style={styles.previewSize}>
               {capturedImage.width}x{capturedImage.height}
@@ -191,7 +191,7 @@ export default function CameraScreen({ navigation, route }: Props) {
               onPress={handlePickFromGallery}
               disabled={loading}
             >
-              <Text style={styles.galleryIcon}>🖼️</Text>
+              <Ionicons name="images-outline" size={28} color={Colors.text.primary} />
               <Text style={styles.galleryLabel}>相册</Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -213,7 +213,8 @@ export default function CameraScreen({ navigation, route }: Props) {
       {/* 提示 */}
       {!capturedImage && (
         <View style={styles.tipContainer}>
-          <Text style={styles.tip}>💡 提示: 让猫咪看着镜头更准确</Text>
+          <Ionicons name="bulb-outline" size={16} color={Colors.text.secondary} />
+          <Text style={styles.tip}> 提示: 让猫咪看着镜头更准确</Text>
         </View>
       )}
     </View>

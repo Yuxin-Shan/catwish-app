@@ -13,6 +13,7 @@ import {
   Animated,
   Alert
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
@@ -97,9 +98,9 @@ export default function AnalysisScreen({ navigation, route }: Props) {
           }
         ]}
       >
-        {/* 猫咪Emoji动画 */}
+        {/* 猫咪图标动画 */}
         <View style={styles.catContainer}>
-          <Text style={styles.catEmoji}>🐱</Text>
+          <Ionicons name="paw-outline" size={80} color={Colors.primary} />
 
           {/* 思考动画 */}
           <ActivityIndicator
