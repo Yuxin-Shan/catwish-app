@@ -18,7 +18,6 @@ import {
   Modal,
   Image
 } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import ViewShot from 'react-native-view-shot';
 import { Ionicons } from '@expo/vector-icons';
@@ -167,7 +166,7 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
             }}
             style={styles.viewShotContainer}
           >
-            <View style={[styles.preview, generatedMeme && styles.previewGenerated]}>
+            <View style={[styles.preview, Boolean(generatedMeme) && styles.previewGenerated]}>
               {/* 猫咪图片 */}
               <Image
                 source={{ uri: imageUri }}
@@ -341,7 +340,7 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
-            <Ionicons name="checkmark-circle" size={64} color={Colors.success} />
+            <Ionicons name="checkmark-circle" size={64} color={Colors.status.success} />
             <Text style={styles.modalTitle}>表情包生成成功!</Text>
             <Text style={styles.modalText}>
               已经为你制作了专属表情包
@@ -642,26 +641,6 @@ const styles = StyleSheet.create({
     color: Colors.text.tertiary,
     textAlign: 'right',
     marginTop: Spacing.xs
-  },
-
-  // 生成后的预览
-  previewGenerated: {
-    borderWidth: 3,
-    borderColor: Colors.primary
-  },
-  generatedBadge: {
-    position: 'absolute',
-    top: Spacing.sm,
-    left: Spacing.sm,
-    backgroundColor: Colors.primary,
-    paddingHorizontal: Spacing.sm,
-    paddingVertical: Spacing.xs,
-    borderRadius: BorderRadius.sm
-  },
-  generatedBadgeText: {
-    ...Typography.bodySmall,
-    color: Colors.text.inverse,
-    fontWeight: '600'
   },
 
   // 模态框

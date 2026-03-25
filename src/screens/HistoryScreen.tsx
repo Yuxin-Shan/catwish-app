@@ -16,13 +16,13 @@ import {
   Alert
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { Colors, Typography, Spacing, BorderRadius, Shadow } from '../constants/theme';
 import { storageService, AnalysisRecord } from '../services/storage';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types/navigation';
 
-type HistoryScreenNavigationProp = StackNavigationProp<RootStackParamList>;
+type HistoryScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 interface Props {
   navigation: HistoryScreenNavigationProp;

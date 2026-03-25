@@ -16,7 +16,7 @@ import { render, screen, fireEvent } from '@testing-library/react-native';
 import HomeScreen from '../HomeScreen';
 
 // Mock navigation
-const mockNavigation = {
+const mockNavigation: any = {
   navigate: jest.fn(),
   goBack: jest.fn(),
   reset: jest.fn(),
@@ -97,7 +97,10 @@ describe('HomeScreen', () => {
       const cameraButton = screen.getByText('拍照解读猫咪心情');
       fireEvent.press(cameraButton);
 
-      expect(mockNavigation.navigate).toHaveBeenCalledWith('Camera');
+      expect(mockNavigation.navigate).toHaveBeenCalledWith({
+        name: 'Camera',
+        params: {}
+      });
     });
 
     it('should navigate to History screen when see all is pressed', () => {

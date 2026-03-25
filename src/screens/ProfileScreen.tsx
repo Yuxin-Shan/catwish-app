@@ -9,12 +9,31 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from 'react-native';
 
 import { Colors, Typography, Spacing, BorderRadius } from '../constants/theme';
+import { API_CONFIG } from '../config/api';
+import { useApp } from '../context/AppContext';
+import { logoutWithBackend } from '../services/api/auth';
 
 export default function ProfileScreen() {
+  const { user, authReady, authSession, clearAuthSession } = useApp();
+
+  const handleLogout = async () => {
+    try {
+      if (API_CONFIG.ENABLE_BACKEND_API && authSession?.refreshToken) {
+        await logoutWithBackend(authSession.refreshToken);
+      }
+
+      await clearAuthSession();
+      Alert.alert('已退出', '当前会话已清理');
+    } catch (error) {
+      Alert.alert('退出失败', error instanceof Error ? error.message : '请稍后重试');
+    }
+  };
+
   return (
     <View style={styles.container}>
       {/* 头部 */}
@@ -22,12 +41,24 @@ export default function ProfileScreen() {
         <View style={styles.avatar}>
           <Text style={styles.avatarEmoji}>🐱</Text>
         </View>
-        <Text style={styles.nickname}>猫语心愿</Text>
-        <Text style={styles.bio}>让每只猫咪都被理解</Text>
+        <Text style={styles.nickname}>{user?.displayName || '猫语心愿'}</Text>
+        <Text style={styles.bio}>
+          {authReady
+            ? user?.email || '让每只猫咪都被理解'
+            : '正在加载会话状态...'}
+        </Text>
+        <View style={styles.statusBadge}>
+          <Text style={styles.statusText}>
+            {API_CONFIG.ENABLE_BACKEND_API ? 'Backend Alpha Mode' : 'Local Demo Mode'}
+          </Text>
+        </View>
       </View>
 
       {/* 菜单列表 */}
       <ScrollView style={styles.menu}>
+        {user && (
+          <MenuItem icon="🚪" title="退出登录" onPress={handleLogout} />
+        )}
         <MenuItem icon="⚙️" title="设置" onPress={() => {}} />
         <MenuItem icon="ℹ️" title="关于" onPress={() => {}} />
         <MenuItem icon="📝" title="反馈" onPress={() => {}} />
@@ -91,6 +122,17 @@ const styles = StyleSheet.create({
   bio: {
     ...Typography.bodySmall,
     color: Colors.text.secondary
+  },
+  statusBadge: {
+    marginTop: Spacing.md,
+    paddingHorizontal: Spacing.md,
+    paddingVertical: Spacing.xs,
+    borderRadius: BorderRadius.full,
+    backgroundColor: Colors.primaryLight
+  },
+  statusText: {
+    ...Typography.bodySmall,
+    color: Colors.primary
   },
   menu: {
     backgroundColor: Colors.background.primary,

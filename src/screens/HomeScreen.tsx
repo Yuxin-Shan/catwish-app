@@ -31,10 +31,16 @@ interface Props {
 }
 
 const HomeScreen = ({ navigation }: Props) => {
+  const rootNavigation = navigation as unknown as NativeStackNavigationProp<RootStackParamList>;
+  const tabNavigation = navigation as unknown as BottomTabNavigationProp<MainTabParamList>;
+
   // 使用useCallback缓存函数,避免不必要的重渲染
   const handleCameraPress = useCallback(() => {
-    navigation.navigate('Camera');
-  }, [navigation]);
+    rootNavigation.navigate({
+      name: 'Camera',
+      params: {}
+    });
+  }, [rootNavigation]);
 
   const handleGalleryPress = useCallback(() => {
     // TODO: 实现相册选择
@@ -42,8 +48,8 @@ const HomeScreen = ({ navigation }: Props) => {
   }, []);
 
   const handleSeeAllPress = useCallback(() => {
-    navigation.navigate('History');
-  }, [navigation]);
+    tabNavigation.navigate('History');
+  }, [tabNavigation]);
 
   // 使用useMemo缓存静态内容
   const illustrationContent = useMemo(() => ({

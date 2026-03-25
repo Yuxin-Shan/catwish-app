@@ -1,0 +1,105 @@
+{
+  "cli": {
+    "version": ">= 5.2.0",
+    "appVersionSource": "local"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleDebug"
+      },
+      "ios": {
+        "simulator": false,
+        "enterpriseProvisioning": "universal"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://dev-api.catwish.com",
+        "EXPO_PUBLIC_ENVIRONMENT": "development",
+        "EXPO_PUBLIC_ENABLE_ANALYTICS": "false"
+      },
+      "cache": {
+        "disabled": false,
+        "key": "catwish-dev-v1"
+      }
+    },
+    "preview": {
+      "distribution": "store",
+      "ios": {
+        "autoSubmit": true,
+        "appName": "猫语心愿 Beta"
+      },
+      "android": {
+        "autoSubmit": true,
+        "track": "internal",
+        "gradleCommand": ":app:assembleRelease"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://staging-api.catwish.com",
+        "EXPO_PUBLIC_ENVIRONMENT": "staging",
+        "EXPO_PUBLIC_ENABLE_ANALYTICS": "true"
+      },
+      "cache": {
+        "disabled": false,
+        "key": "catwish-preview-v1"
+      }
+    },
+    "production": {
+      "distribution": "store",
+      "ios": {
+        "autoSubmit": true,
+        "appName": "猫语心愿"
+      },
+      "android": {
+        "autoSubmit": true,
+        "track": "production",
+        "gradleCommand": ":app:assembleRelease"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://api.catwish.com",
+        "EXPO_PUBLIC_ENVIRONMENT": "production",
+        "EXPO_PUBLIC_ENABLE_ANALYTICS": "true",
+        "EXPO_PUBLIC_SENTRY_DSN": "https://xxxx@sentry.io/xxxxx"
+      },
+      "cache": {
+        "disabled": false,
+        "key": "catwish-prod-v1"
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "$APPLE_ID",
+        "ascAppId": "$ASC_APP_ID",
+        "appleTeamId": "$APPLE_TEAM_ID",
+        "appleIssuerId": "$APPLE_ISSUER_ID",
+        "appleKeyId": "$APPLE_KEY_ID",
+        "appleKeyContent": "$APPLE_KEY_CONTENT"
+      },
+      "android": {
+        "serviceAccountKeyPath": "./google-service-account.json",
+        "track": "production",
+        "releaseStatus": "draft",
+        "rolling": true,
+        "initialRolloutPercent": "10"
+      }
+    }
+  },
+  "hooks": {
+    "preBuild": [
+      {
+        "file": "scripts/pre-build.sh",
+        "platform": "all"
+      }
+    ],
+    "postBuild": [
+      {
+        "file": "scripts/post-build.sh",
+        "platform": "all"
+      }
+    ]
+  }
+}

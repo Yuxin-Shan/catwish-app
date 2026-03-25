@@ -34,7 +34,7 @@ import { Share } from 'react-native/Libraries/Share/Share';
 import { Alert } from 'react-native/Libraries/Alert/Alert';
 
 // Mock navigation
-const mockNavigation = {
+const mockNavigation: any = {
   navigate: jest.fn(),
   goBack: jest.fn(),
   reset: jest.fn(),

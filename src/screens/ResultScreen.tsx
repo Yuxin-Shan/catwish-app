@@ -12,12 +12,9 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
-  Share,
-  Platform
+  Share
 } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Ionicons } from '@expo/vector-icons';
 
 import { Colors, Typography, Spacing, BorderRadius, Shadow } from '../constants/theme';
 import { RootStackParamList } from '../types/navigation';
@@ -25,9 +22,8 @@ import { AnalysisResult } from '../services/ai/types';
 import { storageService } from '../services/storage';
 import { Button } from '../components/Button';
 import { ScreenHeader } from '../components/ScreenHeader';
-import { getEmotionColor } from '../utils/emotionUtils';
 
-type ResultScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Result'>;
+type ResultScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Result'>;
 
 interface Props {
   navigation: ResultScreenNavigationProp;
@@ -42,12 +38,7 @@ interface Props {
 export default function ResultScreen({ navigation, route }: Props) {
   const { imageUri, analysisResult } = route.params;
 
-  // 保存到本地存储
-  React.useEffect(() => {
-    saveToHistory();
-  }, []);
-
-  const saveToHistory = async () => {
+  const saveToHistory = React.useCallback(async () => {
     try {
       const record = {
         id: Date.now().toString(),
@@ -61,7 +52,12 @@ export default function ResultScreen({ navigation, route }: Props) {
     } catch (error) {
       console.error('保存失败:', error);
     }
-  };
+  }, [analysisResult, imageUri]);
+
+  // 保存到本地存储
+  React.useEffect(() => {
+    saveToHistory();
+  }, [saveToHistory]);
 
   const handleGenerateMeme = () => {
     navigation.navigate('MemeEditor', {
@@ -72,7 +68,7 @@ export default function ResultScreen({ navigation, route }: Props) {
 
   const handleShare = async () => {
     try {
-      const { url } = await Share.share({
+      await Share.share({
         message: `我家的猫咪说: "${analysisResult.catSays}" 🐱\n\n用猫语心愿APP看看你的猫咪在想什么~`,
         url: 'https://catwish.app' // 未来添加
       });

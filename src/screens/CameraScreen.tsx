@@ -14,7 +14,6 @@ import {
   ActivityIndicator,
   Dimensions
 } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -114,7 +113,7 @@ export default function CameraScreen({ navigation, route }: Props) {
     if (capturedImage) {
       navigation.navigate('Analysis', {
         imageUri: capturedImage.uri
-      } as any);
+      });
     }
   };
 
@@ -152,11 +151,11 @@ export default function CameraScreen({ navigation, route }: Props) {
           </View>
         ) : (
           <>
-            <View style={styles.frame}>
-              <View style={styles.cornerTL} />
-              <View style={styles.cornerTR} />
-              <View style={styles.cornerBL} />
-              <View style={styles.cornerBR} />
+            <View style={styles.frame} testID="camera-frame">
+              <View style={styles.cornerTL} testID="corner-tl" />
+              <View style={styles.cornerTR} testID="corner-tr" />
+              <View style={styles.cornerBL} testID="corner-bl" />
+              <View style={styles.cornerBR} testID="corner-br" />
             </View>
             <Text style={styles.hint}>让猫咪在框框内~</Text>
           </>
@@ -200,9 +199,10 @@ export default function CameraScreen({ navigation, route }: Props) {
               style={styles.captureButton}
               onPress={handleTakePhoto}
               disabled={loading}
+              testID="capture-button"
             >
               {loading ? (
-                <ActivityIndicator color={Colors.background.primary} size={32} />
+                <ActivityIndicator color={Colors.background.primary} size={32} testID="activity-indicator" />
               ) : (
                 <View style={styles.captureInner} />
               )}

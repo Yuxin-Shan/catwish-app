@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card Snapshot should match snapshot for card with custom padding 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "#FFFFFF",
+        "borderRadius": 16,
+      },
+      {},
+      {
+        "padding": 8,
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  Content
+</View>
+`;
+
+exports[`Card Snapshot should match snapshot for default card 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "#FFFFFF",
+        "borderRadius": 16,
+      },
+      {},
+      {
+        "padding": 16,
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  Content
+</View>
+`;
+
+exports[`Card Snapshot should match snapshot for elevated card 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "#FFFFFF",
+        "borderRadius": 16,
+      },
+      {
+        "elevation": 4,
+        "shadowColor": "#000",
+        "shadowOffset": {
+          "height": 4,
+          "width": 0,
+        },
+        "shadowOpacity": 0.12,
+        "shadowRadius": 16,
+      },
+      {
+        "padding": 16,
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  Content
+</View>
+`;
+
+exports[`Card Snapshot should match snapshot for outlined card 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "#FFFFFF",
+        "borderRadius": 16,
+      },
+      {
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1,
+      },
+      {
+        "padding": 16,
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  Content
+</View>
+`;
+
+exports[`Card Snapshot should match snapshot for primary card 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "#FFFFFF",
+        "borderRadius": 16,
+      },
+      {
+        "backgroundColor": "#FFB6C1",
+      },
+      {
+        "padding": 16,
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  Content
+</View>
+`;

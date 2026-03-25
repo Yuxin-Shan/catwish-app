@@ -1,0 +1,547 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CameraScreen Snapshot should match the snapshot for camera view 1`] = `
+<View
+  style={
+    {
+      "backgroundColor": "#000",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      [
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "minHeight": 100,
+          "paddingBottom": 12,
+          "paddingHorizontal": 16,
+          "paddingTop": 60,
+          "zIndex": 600,
+        },
+        {
+          "backgroundColor": "#000",
+        },
+        undefined,
+      ]
+    }
+    testID="camera-header"
+  >
+    <TouchableOpacity
+      accessibilityLabel="返回"
+      accessibilityRole="button"
+      onClick={[Function]}
+      style={
+        {
+          "alignItems": "flex-start",
+          "height": 44,
+          "justifyContent": "center",
+          "width": 44,
+        }
+      }
+      testID="back-button"
+    >
+      <Text
+        testID="back-icon"
+      >
+        Ionicons: arrow-back
+      </Text>
+    </TouchableOpacity>
+    <Text
+      numberOfLines={1}
+      style={
+        [
+          {
+            "flex": 1,
+            "fontSize": 18,
+            "fontWeight": "600",
+            "lineHeight": 26,
+            "marginHorizontal": 12,
+            "textAlign": "center",
+          },
+          {
+            "color": "#FFFFFF",
+          },
+        ]
+      }
+    >
+      拍照解读
+    </Text>
+    <TouchableOpacity
+      accessibilityRole="button"
+      onClick={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "height": 44,
+          "justifyContent": "center",
+          "width": 44,
+        }
+      }
+      testID="right-button"
+    >
+      <Text
+        testID="right-icon"
+      >
+        Ionicons: flash
+      </Text>
+    </TouchableOpacity>
+  </View>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "marginHorizontal": 16,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "aspectRatio": 1,
+          "borderColor": "#FFFFFF",
+          "borderRadius": 16,
+          "borderWidth": 2,
+          "width": "100%",
+        }
+      }
+      testID="camera-frame"
+    >
+      <View
+        style={
+          {
+            "borderColor": "#FFB6C1",
+            "borderLeftWidth": 4,
+            "borderTopLeftRadius": 16,
+            "borderTopWidth": 4,
+            "height": 30,
+            "left": -2,
+            "position": "absolute",
+            "top": -2,
+            "width": 30,
+          }
+        }
+        testID="corner-tl"
+      />
+      <View
+        style={
+          {
+            "borderColor": "#FFB6C1",
+            "borderRightWidth": 4,
+            "borderTopRightRadius": 16,
+            "borderTopWidth": 4,
+            "height": 30,
+            "position": "absolute",
+            "right": -2,
+            "top": -2,
+            "width": 30,
+          }
+        }
+        testID="corner-tr"
+      />
+      <View
+        style={
+          {
+            "borderBottomLeftRadius": 16,
+            "borderBottomWidth": 4,
+            "borderColor": "#FFB6C1",
+            "borderLeftWidth": 4,
+            "bottom": -2,
+            "height": 30,
+            "left": -2,
+            "position": "absolute",
+            "width": 30,
+          }
+        }
+        testID="corner-bl"
+      />
+      <View
+        style={
+          {
+            "borderBottomRightRadius": 16,
+            "borderBottomWidth": 4,
+            "borderColor": "#FFB6C1",
+            "borderRightWidth": 4,
+            "bottom": -2,
+            "height": 30,
+            "position": "absolute",
+            "right": -2,
+            "width": 30,
+          }
+        }
+        testID="corner-br"
+      />
+    </View>
+    <Text
+      style={
+        {
+          "color": "#FFFFFF",
+          "fontSize": 16,
+          "fontWeight": "400",
+          "lineHeight": 24,
+          "marginTop": 16,
+          "opacity": 0.8,
+          "textAlign": "center",
+        }
+      }
+    >
+      让猫咪在框框内~
+    </Text>
+  </View>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "paddingBottom": 40,
+        "paddingHorizontal": 20,
+        "paddingTop": 16,
+      }
+    }
+  >
+    <TouchableOpacity
+      disabled={false}
+      onClick={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text>
+        Ionicons: images-outline
+      </Text>
+      <Text
+        style={
+          {
+            "color": "#FFFFFF",
+            "fontSize": 14,
+            "fontWeight": "400",
+            "lineHeight": 20,
+          }
+        }
+      >
+        相册
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      disabled={false}
+      onClick={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#FFFFFF",
+          "borderRadius": 40,
+          "height": 80,
+          "justifyContent": "center",
+          "width": 80,
+        }
+      }
+      testID="capture-button"
+    >
+      <View
+        style={
+          {
+            "backgroundColor": "#FFF",
+            "borderRadius": 35,
+            "height": 70,
+            "width": 70,
+          }
+        }
+      />
+    </TouchableOpacity>
+    <View
+      style={
+        {
+          "width": 60,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      {
+        "backgroundColor": "rgba(0,0,0,0.6)",
+        "borderRadius": 8,
+        "bottom": 120,
+        "left": 16,
+        "padding": 8,
+        "position": "absolute",
+        "right": 16,
+      }
+    }
+  >
+    <Text>
+      Ionicons: bulb-outline
+    </Text>
+    <Text
+      style={
+        {
+          "color": "#FFFFFF",
+          "fontSize": 14,
+          "fontWeight": "400",
+          "lineHeight": 20,
+          "textAlign": "center",
+        }
+      }
+    >
+       提示: 让猫咪看着镜头更准确
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`CameraScreen Snapshot should match the snapshot for preview view 1`] = `
+<View
+  style={
+    {
+      "backgroundColor": "#000",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      [
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "minHeight": 100,
+          "paddingBottom": 12,
+          "paddingHorizontal": 16,
+          "paddingTop": 60,
+          "zIndex": 600,
+        },
+        {
+          "backgroundColor": "#000",
+        },
+        undefined,
+      ]
+    }
+    testID="camera-header"
+  >
+    <TouchableOpacity
+      accessibilityLabel="返回"
+      accessibilityRole="button"
+      onClick={[Function]}
+      style={
+        {
+          "alignItems": "flex-start",
+          "height": 44,
+          "justifyContent": "center",
+          "width": 44,
+        }
+      }
+      testID="back-button"
+    >
+      <Text
+        testID="back-icon"
+      >
+        Ionicons: arrow-back
+      </Text>
+    </TouchableOpacity>
+    <Text
+      numberOfLines={1}
+      style={
+        [
+          {
+            "flex": 1,
+            "fontSize": 18,
+            "fontWeight": "600",
+            "lineHeight": 26,
+            "marginHorizontal": 12,
+            "textAlign": "center",
+          },
+          {
+            "color": "#FFFFFF",
+          },
+        ]
+      }
+    >
+      拍照解读
+    </Text>
+    <TouchableOpacity
+      accessibilityRole="button"
+      onClick={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "height": 44,
+          "justifyContent": "center",
+          "width": 44,
+        }
+      }
+      testID="right-button"
+    >
+      <Text
+        testID="right-icon"
+      >
+        Ionicons: flash
+      </Text>
+    </TouchableOpacity>
+  </View>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "marginHorizontal": 16,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "aspectRatio": 1,
+          "backgroundColor": "#333",
+          "borderRadius": 16,
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Text>
+        Ionicons: image-outline
+      </Text>
+      <Text
+        style={
+          {
+            "color": "#999999",
+            "fontSize": 14,
+            "fontWeight": "400",
+            "lineHeight": 20,
+            "marginTop": 8,
+          }
+        }
+      >
+        mock://captured/1234567890000.jpg
+      </Text>
+      <Text
+        style={
+          {
+            "color": "#999999",
+            "fontSize": 14,
+            "fontWeight": "400",
+            "lineHeight": 20,
+          }
+        }
+      >
+        800
+        x
+        600
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "paddingBottom": 40,
+        "paddingHorizontal": 20,
+        "paddingTop": 16,
+      }
+    }
+  >
+    <TouchableOpacity
+      onClick={[Function]}
+      style={
+        [
+          {
+            "alignItems": "center",
+            "borderRadius": 12,
+            "flex": 1,
+            "justifyContent": "center",
+            "marginHorizontal": 8,
+            "paddingVertical": 12,
+          },
+          {
+            "backgroundColor": "rgba(255,255,255,0.2)",
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          {
+            "color": "#FFFFFF",
+            "fontSize": 16,
+            "fontWeight": "600",
+          }
+        }
+      >
+        ✂️ 裁剪
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      onClick={[Function]}
+      style={
+        [
+          {
+            "alignItems": "center",
+            "borderRadius": 12,
+            "flex": 1,
+            "justifyContent": "center",
+            "marginHorizontal": 8,
+            "paddingVertical": 12,
+          },
+          {
+            "backgroundColor": "rgba(255,255,255,0.2)",
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          {
+            "color": "#FFFFFF",
+            "fontSize": 16,
+            "fontWeight": "600",
+          }
+        }
+      >
+        重拍
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      onClick={[Function]}
+      style={
+        [
+          {
+            "alignItems": "center",
+            "borderRadius": 12,
+            "flex": 1,
+            "justifyContent": "center",
+            "marginHorizontal": 8,
+            "paddingVertical": 12,
+          },
+          {
+            "backgroundColor": "#FFB6C1",
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          {
+            "color": "#FFFFFF",
+          }
+        }
+      >
+        使用
+      </Text>
+    </TouchableOpacity>
+  </View>
+</View>
+`;

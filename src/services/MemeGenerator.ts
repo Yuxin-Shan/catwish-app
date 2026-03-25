@@ -4,10 +4,8 @@
  * 使用ViewShot实现真实的图片合成
  */
 
-import { View, StyleProp, ViewStyle, Image, Text } from 'react-native';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
-import { Share, Alert, Platform, PermissionsAndroid } from 'react-native';
-import { Colors } from '../constants/theme';
+import { Share, Alert, Platform } from 'react-native';
 
 export interface MemeConfig {
   imageUri: string;
@@ -68,7 +66,7 @@ export class MemeGenerator {
       }
 
       // 保存到相册
-      const savedUri = await CameraRoll.save(uri, { type: 'photo' });
+      await CameraRoll.save(uri, { type: 'photo' });
 
       Alert.alert('保存成功', '表情包已保存到相册');
       return true;
@@ -116,8 +114,14 @@ export class MemeGenerator {
    */
   private async requestStoragePermission(): Promise<boolean> {
     try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+      const permissionsAndroid = require('react-native').PermissionsAndroid;
+
+      if (!permissionsAndroid) {
+        return false;
+      }
+
+      const granted = await permissionsAndroid.request(
+        permissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
         {
           title: '相册权限',
           message: '需要相册权限来保存表情包',
@@ -125,7 +129,7 @@ export class MemeGenerator {
           buttonPositive: '允许'
         }
       );
-      return granted === PermissionsAndroid.RESULTS.GRANTED;
+      return granted === permissionsAndroid.RESULTS.GRANTED;
     } catch (error) {
       console.error('权限请求失败:', error);
       return false;
@@ -135,7 +139,7 @@ export class MemeGenerator {
   /**
    * 批量生成表情包（暂不实现）
    */
-  async generateBatch(configs: MemeConfig[]): Promise<MemeResult[]> {
+  async generateBatch(_configs: MemeConfig[]): Promise<MemeResult[]> {
     throw new Error('批量生成功能暂未实现');
   }
 
@@ -171,11 +175,7 @@ export class MemeGenerator {
    * 健康检查
    */
   async healthCheck(): Promise<boolean> {
-    try {
-      return true;
-    } catch (error) {
-      return false;
-    }
+    return true;
   }
 
   /**

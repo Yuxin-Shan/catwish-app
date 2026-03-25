@@ -3,7 +3,7 @@
  * 性能优化工具函数
  */
 
-import { useCallback, useRef, useEffect } from 'react';
+import React, { useCallback, useRef, useEffect } from 'react';
 
 /**
  * 防抖Hook
@@ -69,21 +69,24 @@ export function useThrottle<T extends (...args: any[]) => any>(
  */
 export function usePerformanceMonitor(componentName: string) {
   const renderCountRef = useRef(0);
-  const mountTimeRef = useRef(Date.now());
+  const mountTimeRef = useRef<number | null>(null);
 
   useEffect(() => {
-    renderCountRef.current += 1;
+    if (mountTimeRef.current === null) {
+      mountTimeRef.current = Date.now();
+    }
 
-    const currentTime = Date.now();
-    const mountDuration = currentTime - mountTimeRef.current;
+    renderCountRef.current += 1;
   });
 
   const getReport = useCallback(() => {
+    const mountTime = mountTimeRef.current ?? 0;
+
     return {
       component: componentName,
       renders: renderCountRef.current,
-      mountTime: mountTimeRef.current,
-      uptime: Date.now() - mountTimeRef.current
+      mountTime,
+      uptime: mountTime ? Date.now() - mountTime : 0
     };
   }, [componentName]);
 
