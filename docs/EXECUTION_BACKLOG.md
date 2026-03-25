@@ -34,6 +34,7 @@
 |---|---|---|---|---|---|---|
 | CAT-B01 | 生产密钥历史清理 | git 历史已包含敏感信息 | 完成密钥轮换及历史治理策略 | CAT-001，需要仓库管理员操作 | Critical | Blocked |
 | CAT-B03 | 本地数据库基础设施缺失 | 当前机器无 `psql` / `docker`，真实 DB 环境端到端验证受阻 | 提供可执行的本地 PostgreSQL provisioning 路径，或明确远程 dev DB 方案 | CAT-016 | High | Blocked |
+| CAT-B04 | GitHub 远端 CI 激活受网络出口阻塞 | 本地已完成 checkpoint commit，但 `git push` 到 GitHub 失败，当前环境无法连接 `github.com:443` | 恢复当前环境到 GitHub 的网络连通性，或改由可联网环境推送 checkpoint 分支触发 CI | CAT-005 | High | Blocked |
 
 ## Done
 
