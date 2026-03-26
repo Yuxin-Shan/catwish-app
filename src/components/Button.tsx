@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
+  type TextStyle,
+  type ViewStyle,
   ActivityIndicator
 } from 'react-native';
 import { Colors, Typography, Spacing, BorderRadius } from '../constants/theme';
@@ -67,13 +69,35 @@ export const Button: React.FC<ButtonProps> = ({
   }, [disabled, externalLoading, internalLoading, debounce, debounceMs, lastPress, onPress]);
 
   const isLoading = externalLoading || internalLoading;
+  const variantStyle: ViewStyle = {
+    primary: styles.primary,
+    secondary: styles.secondary,
+    outline: styles.outline,
+    text: styles.textVariant
+  }[variant];
+  const sizeStyle: ViewStyle = {
+    small: styles.small,
+    medium: styles.medium,
+    large: styles.large
+  }[size];
+  const labelVariantStyle: TextStyle = {
+    primary: styles.primaryText,
+    secondary: styles.secondaryText,
+    outline: styles.outlineText,
+    text: styles.textText
+  }[variant];
+  const labelSizeStyle: TextStyle | undefined = {
+    small: styles.smallText,
+    medium: undefined,
+    large: styles.largeText
+  }[size];
 
   return (
     <TouchableOpacity
       style={[
         styles.button,
-        styles[variant],
-        styles[size],
+        variantStyle,
+        sizeStyle,
         fullWidth && styles.fullWidth,
         (disabled || isLoading) && styles.disabled
       ]}
@@ -82,15 +106,18 @@ export const Button: React.FC<ButtonProps> = ({
       activeOpacity={0.8}
     >
       {isLoading ? (
-        <ActivityIndicator color={variant === 'outline' || variant === 'text' ? Colors.primary : Colors.text.inverse} />
+        <ActivityIndicator
+          color={variant === 'outline' || variant === 'text' ? Colors.primary : Colors.text.inverse}
+          testID="activity-indicator"
+        />
       ) : (
         <>
           {icon && <Text style={[styles.icon, (variant === 'outline' || variant === 'text') && styles.iconColored]}>{icon}</Text>}
           <Text
             style={[
-              styles.text,
-              styles[`${variant}Text`],
-              styles[`${size}Text`]
+              styles.label,
+              labelVariantStyle,
+              labelSizeStyle
             ]}
           >
             {title}
@@ -121,7 +148,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: Colors.primary
   },
-  text: {
+  textVariant: {
     backgroundColor: 'transparent'
   },
 
@@ -150,7 +177,7 @@ const styles = StyleSheet.create({
   },
 
   // 文字
-  text: {
+  label: {
     ...Typography.button,
     color: Colors.text.inverse,
     fontWeight: '600'

@@ -1,0 +1,312 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomeScreen Snapshot should match the snapshot 1`] = `
+<View
+  style={
+    {
+      "backgroundColor": "#FFF5F7",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      [
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "minHeight": 100,
+          "paddingBottom": 12,
+          "paddingHorizontal": 16,
+          "paddingTop": 60,
+          "zIndex": 600,
+        },
+        {
+          "backgroundColor": "#FFFFFF",
+        },
+        undefined,
+      ]
+    }
+    testID="home-header"
+  >
+    <View
+      style={
+        {
+          "height": 44,
+          "width": 44,
+        }
+      }
+    />
+    <Text
+      numberOfLines={1}
+      style={
+        [
+          {
+            "flex": 1,
+            "fontSize": 18,
+            "fontWeight": "600",
+            "lineHeight": 26,
+            "marginHorizontal": 12,
+            "textAlign": "center",
+          },
+          {
+            "color": "#333333",
+          },
+        ]
+      }
+    >
+      🐱 猫语心愿
+    </Text>
+    <TouchableOpacity
+      accessibilityRole="button"
+      onClick={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "height": 44,
+          "justifyContent": "center",
+          "width": 44,
+        }
+      }
+      testID="right-button"
+    >
+      <Text
+        testID="right-icon"
+      >
+        Ionicons: settings
+      </Text>
+    </TouchableOpacity>
+  </View>
+  <ScrollView
+    contentContainerStyle={
+      {
+        "padding": 16,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "paddingVertical": 32,
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "fontSize": 80,
+            "marginBottom": 16,
+          }
+        }
+      >
+        🐱💬
+      </Text>
+      <Text
+        style={
+          {
+            "color": "#333333",
+            "fontSize": 24,
+            "fontWeight": "600",
+            "lineHeight": 32,
+            "marginBottom": 8,
+          }
+        }
+      >
+        让猫咪"开口说话"
+      </Text>
+      <Text
+        style={
+          {
+            "color": "#666666",
+            "fontSize": 16,
+            "fontWeight": "400",
+            "lineHeight": 24,
+            "textAlign": "center",
+          }
+        }
+      >
+        AI解读猫咪情绪,生成可爱表情包
+      </Text>
+    </View>
+    <View
+      style={
+        {
+          "gap": 12,
+        }
+      }
+    >
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onClick={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "backgroundColor": "#FFB6C1",
+              "borderRadius": 16,
+              "elevation": 2,
+              "paddingHorizontal": 24,
+              "paddingVertical": 20,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 2,
+                "width": 0,
+              },
+              "shadowOpacity": 0.1,
+              "shadowRadius": 8,
+            },
+            {
+              "backgroundColor": "#FFB6C1",
+            },
+          ]
+        }
+      >
+        <Text>
+          Ionicons: camera
+        </Text>
+        <Text
+          style={
+            {
+              "color": "#FFFFFF",
+              "fontSize": 18,
+              "fontWeight": "600",
+            }
+          }
+        >
+          拍照解读猫咪心情
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onClick={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "backgroundColor": "#FFB6C1",
+              "borderRadius": 16,
+              "elevation": 2,
+              "paddingHorizontal": 24,
+              "paddingVertical": 20,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 2,
+                "width": 0,
+              },
+              "shadowOpacity": 0.1,
+              "shadowRadius": 8,
+            },
+            {
+              "backgroundColor": "#87CEEB",
+            },
+          ]
+        }
+      >
+        <Text>
+          Ionicons: image
+        </Text>
+        <Text
+          style={
+            {
+              "color": "#FFFFFF",
+              "fontSize": 18,
+              "fontWeight": "600",
+            }
+          }
+        >
+          从相册选择
+        </Text>
+      </TouchableOpacity>
+    </View>
+    <View
+      style={
+        {
+          "marginTop": 20,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginBottom": 12,
+          }
+        }
+      >
+        <Text
+          style={
+            {
+              "color": "#333333",
+              "fontSize": 20,
+              "fontWeight": "600",
+              "lineHeight": 28,
+            }
+          }
+        >
+          最近记录
+        </Text>
+        <TouchableOpacity
+          onClick={[Function]}
+        >
+          <Text
+            style={
+              {
+                "color": "#FFB6C1",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "lineHeight": 20,
+              }
+            }
+          >
+            查看全部 →
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "backgroundColor": "#FFFFFF",
+            "borderColor": "#E0E0E0",
+            "borderRadius": 16,
+            "borderStyle": "dashed",
+            "borderWidth": 2,
+            "padding": 32,
+          }
+        }
+      >
+        <Text
+          style={
+            {
+              "color": "#999999",
+              "fontSize": 16,
+              "fontWeight": "400",
+              "lineHeight": 24,
+              "marginTop": 8,
+            }
+          }
+        >
+          😿 还没有记录哦
+        </Text>
+        <Text
+          style={
+            {
+              "color": "#999999",
+              "fontSize": 14,
+              "fontWeight": "400",
+              "lineHeight": 20,
+              "marginTop": 4,
+            }
+          }
+        >
+          快来拍第一张照片吧~
+        </Text>
+      </View>
+    </View>
+  </ScrollView>
+</View>
+`;

@@ -1,0 +1,370 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Snapshot should match snapshot for button with icon 1`] = `
+<TouchableOpacity
+  activeOpacity={0.8}
+  disabled={false}
+  onClick={[Function]}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "borderRadius": 12,
+        "flexDirection": "row",
+        "justifyContent": "center",
+      },
+      {
+        "backgroundColor": "#FFB6C1",
+      },
+      {
+        "paddingHorizontal": 20,
+        "paddingVertical": 12,
+      },
+      false,
+      false,
+    ]
+  }
+>
+  <Text
+    style={
+      [
+        {
+          "color": "#FFFFFF",
+          "fontSize": 18,
+          "marginRight": 4,
+        },
+        false,
+      ]
+    }
+  >
+    🔥
+  </Text>
+  <Text
+    style={
+      [
+        {
+          "color": "#FFFFFF",
+          "fontSize": 16,
+          "fontWeight": "600",
+        },
+        {
+          "color": "#FFFFFF",
+        },
+        undefined,
+      ]
+    }
+  >
+    Test
+  </Text>
+</TouchableOpacity>
+`;
+
+exports[`Button Snapshot should match snapshot for disabled button 1`] = `
+<TouchableOpacity
+  activeOpacity={0.8}
+  disabled={true}
+  onClick={[Function]}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "borderRadius": 12,
+        "flexDirection": "row",
+        "justifyContent": "center",
+      },
+      {
+        "backgroundColor": "#FFB6C1",
+      },
+      {
+        "paddingHorizontal": 20,
+        "paddingVertical": 12,
+      },
+      false,
+      {
+        "opacity": 0.5,
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      [
+        {
+          "color": "#FFFFFF",
+          "fontSize": 16,
+          "fontWeight": "600",
+        },
+        {
+          "color": "#FFFFFF",
+        },
+        undefined,
+      ]
+    }
+  >
+    Test
+  </Text>
+</TouchableOpacity>
+`;
+
+exports[`Button Snapshot should match snapshot for fullWidth button 1`] = `
+<TouchableOpacity
+  activeOpacity={0.8}
+  disabled={false}
+  onClick={[Function]}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "borderRadius": 12,
+        "flexDirection": "row",
+        "justifyContent": "center",
+      },
+      {
+        "backgroundColor": "#FFB6C1",
+      },
+      {
+        "paddingHorizontal": 20,
+        "paddingVertical": 12,
+      },
+      {
+        "width": "100%",
+      },
+      false,
+    ]
+  }
+>
+  <Text
+    style={
+      [
+        {
+          "color": "#FFFFFF",
+          "fontSize": 16,
+          "fontWeight": "600",
+        },
+        {
+          "color": "#FFFFFF",
+        },
+        undefined,
+      ]
+    }
+  >
+    Test
+  </Text>
+</TouchableOpacity>
+`;
+
+exports[`Button Snapshot should match snapshot for loading button 1`] = `
+<TouchableOpacity
+  activeOpacity={0.8}
+  disabled={true}
+  onClick={[Function]}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "borderRadius": 12,
+        "flexDirection": "row",
+        "justifyContent": "center",
+      },
+      {
+        "backgroundColor": "#FFB6C1",
+      },
+      {
+        "paddingHorizontal": 20,
+        "paddingVertical": 12,
+      },
+      false,
+      {
+        "opacity": 0.5,
+      },
+    ]
+  }
+>
+  <ActivityIndicator
+    color="#FFFFFF"
+    testID="activity-indicator"
+  />
+</TouchableOpacity>
+`;
+
+exports[`Button Snapshot should match snapshot for outline button 1`] = `
+<TouchableOpacity
+  activeOpacity={0.8}
+  disabled={false}
+  onClick={[Function]}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "borderRadius": 12,
+        "flexDirection": "row",
+        "justifyContent": "center",
+      },
+      {
+        "backgroundColor": "transparent",
+        "borderColor": "#FFB6C1",
+        "borderWidth": 2,
+      },
+      {
+        "paddingHorizontal": 20,
+        "paddingVertical": 12,
+      },
+      false,
+      false,
+    ]
+  }
+>
+  <Text
+    style={
+      [
+        {
+          "color": "#FFFFFF",
+          "fontSize": 16,
+          "fontWeight": "600",
+        },
+        {
+          "color": "#FFB6C1",
+        },
+        undefined,
+      ]
+    }
+  >
+    Test
+  </Text>
+</TouchableOpacity>
+`;
+
+exports[`Button Snapshot should match snapshot for primary button 1`] = `
+<TouchableOpacity
+  activeOpacity={0.8}
+  disabled={false}
+  onClick={[Function]}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "borderRadius": 12,
+        "flexDirection": "row",
+        "justifyContent": "center",
+      },
+      {
+        "backgroundColor": "#FFB6C1",
+      },
+      {
+        "paddingHorizontal": 20,
+        "paddingVertical": 12,
+      },
+      false,
+      false,
+    ]
+  }
+>
+  <Text
+    style={
+      [
+        {
+          "color": "#FFFFFF",
+          "fontSize": 16,
+          "fontWeight": "600",
+        },
+        {
+          "color": "#FFFFFF",
+        },
+        undefined,
+      ]
+    }
+  >
+    Test
+  </Text>
+</TouchableOpacity>
+`;
+
+exports[`Button Snapshot should match snapshot for secondary button 1`] = `
+<TouchableOpacity
+  activeOpacity={0.8}
+  disabled={false}
+  onClick={[Function]}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "borderRadius": 12,
+        "flexDirection": "row",
+        "justifyContent": "center",
+      },
+      {
+        "backgroundColor": "#87CEEB",
+      },
+      {
+        "paddingHorizontal": 20,
+        "paddingVertical": 12,
+      },
+      false,
+      false,
+    ]
+  }
+>
+  <Text
+    style={
+      [
+        {
+          "color": "#FFFFFF",
+          "fontSize": 16,
+          "fontWeight": "600",
+        },
+        {
+          "color": "#FFFFFF",
+        },
+        undefined,
+      ]
+    }
+  >
+    Test
+  </Text>
+</TouchableOpacity>
+`;
+
+exports[`Button Snapshot should match snapshot for text button 1`] = `
+<TouchableOpacity
+  activeOpacity={0.8}
+  disabled={false}
+  onClick={[Function]}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "borderRadius": 12,
+        "flexDirection": "row",
+        "justifyContent": "center",
+      },
+      {
+        "backgroundColor": "transparent",
+      },
+      {
+        "paddingHorizontal": 20,
+        "paddingVertical": 12,
+      },
+      false,
+      false,
+    ]
+  }
+>
+  <Text
+    style={
+      [
+        {
+          "color": "#FFFFFF",
+          "fontSize": 16,
+          "fontWeight": "600",
+        },
+        {
+          "color": "#FFB6C1",
+        },
+        undefined,
+      ]
+    }
+  >
+    Test
+  </Text>
+</TouchableOpacity>
+`;

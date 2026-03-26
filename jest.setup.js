@@ -4,6 +4,25 @@ global.__DEV__ = true;
 // Mock React Native modules
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 
+// Mock Share and Alert globally
+global.__mockShare = jest.fn().mockResolvedValue({ url: 'https://test.com' });
+global.__mockAlert = jest.fn();
+
+// Mock Share module
+jest.mock('react-native/Libraries/Share/Share', () => ({
+  Share: {
+    share: global.__mockShare,
+    sharedAction: 'sharedAction',
+  },
+}));
+
+// Mock Alert module
+jest.mock('react-native/Libraries/Alert/Alert', () => ({
+  Alert: {
+    alert: global.__mockAlert,
+  },
+}));
+
 // Mock navigation
 jest.mock('@react-navigation/native', () => ({
   ...jest.requireActual('@react-navigation/native'),
@@ -35,7 +54,14 @@ jest.mock('expo-image-picker', () => ({
   },
 }));
 
-// Mock AsyncStorage
-jest.mock('@react-native-async-storage/async-storage', () =>
-  require('@react-native-async-storage/async-storage/jest/async-storage-mock')
-);
+// Mock AsyncStorage with simple mock
+jest.mock('@react-native-async-storage/async-storage', () => ({
+  setItem: jest.fn(),
+  getItem: jest.fn(),
+  removeItem: jest.fn(),
+  clear: jest.fn(),
+  getAllKeys: jest.fn(),
+  multiGet: jest.fn(),
+  multiSet: jest.fn(),
+  multiRemove: jest.fn(),
+}));

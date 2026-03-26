@@ -18,9 +18,9 @@ import {
   Modal,
   Image
 } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import ViewShot from 'react-native-view-shot';
+import { Ionicons } from '@expo/vector-icons';
 
 import { Colors, Typography, Spacing, BorderRadius, Shadow } from '../constants/theme';
 import { RootStackParamList } from '../types/navigation';
@@ -93,7 +93,6 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
       const result = await memeGenerator.generateMeme(config, viewShotRef);
       setGeneratedMeme(result.uri);
       setShowSuccessModal(true);
-      console.log('✅ 表情包生成成功:', result);
     } catch (error: any) {
       console.error('❌ 生成失败:', error);
       Alert.alert('生成失败', error.message || '无法生成表情包，请重试');
@@ -146,11 +145,11 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
       {/* 顶部导航 */}
       <View style={styles.navBar}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={styles.backIcon}>←</Text>
+          <Ionicons name="arrow-back" size={28} color={Colors.text.primary} />
         </TouchableOpacity>
         <Text style={styles.navTitle}>表情包制作</Text>
         <TouchableOpacity onPress={handleDone} style={styles.doneButton}>
-          <Text style={styles.doneIcon}>✓</Text>
+          <Ionicons name="checkmark" size={24} color={Colors.primary} />
         </TouchableOpacity>
       </View>
 
@@ -167,7 +166,7 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
             }}
             style={styles.viewShotContainer}
           >
-            <View style={[styles.preview, generatedMeme && styles.previewGenerated]}>
+            <View style={[styles.preview, Boolean(generatedMeme) && styles.previewGenerated]}>
               {/* 猫咪图片 */}
               <Image
                 source={{ uri: imageUri }}
@@ -232,7 +231,7 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
                   styles.filterOption,
                   selectedFilter === filter.id && styles.activeFilter
                 ]}
-                onPress={() => setSelectedFilter(filter.id as any)}
+                onPress={() => setSelectedFilter(filter.id)}
                 disabled={loading}
               >
                 <Text style={styles.filterEmoji}>{filter.emoji}</Text>
@@ -308,14 +307,14 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
               style={styles.actionButton}
               onPress={handleSaveToGallery}
             >
-              <Text style={styles.actionButtonIcon}>💾</Text>
+              <Ionicons name="download-outline" size={24} color={Colors.text.primary} />
               <Text style={styles.actionButtonText}>保存</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.actionButton}
               onPress={handleShare}
             >
-              <Text style={styles.actionButtonIcon}>📤</Text>
+              <Ionicons name="share-social-outline" size={24} color={Colors.text.primary} />
               <Text style={styles.actionButtonText}>分享</Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -325,7 +324,7 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
                 setShowSuccessModal(false);
               }}
             >
-              <Text style={styles.actionButtonIcon}>🔄</Text>
+              <Ionicons name="refresh-outline" size={24} color={Colors.text.primary} />
               <Text style={styles.actionButtonText}>重新制作</Text>
             </TouchableOpacity>
           </View>
@@ -341,7 +340,7 @@ export default function MemeEditorScreen({ navigation, route }: Props) {
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalIcon}>🎉</Text>
+            <Ionicons name="checkmark-circle" size={64} color={Colors.status.success} />
             <Text style={styles.modalTitle}>表情包生成成功!</Text>
             <Text style={styles.modalText}>
               已经为你制作了专属表情包
@@ -389,10 +388,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center'
   },
-  backIcon: {
-    fontSize: 28,
-    color: Colors.text.primary
-  },
   navTitle: {
     ...Typography.bodyLarge,
     color: Colors.text.primary,
@@ -403,11 +398,6 @@ const styles = StyleSheet.create({
     height: 44,
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  doneIcon: {
-    fontSize: 24,
-    color: Colors.primary,
-    fontWeight: '600'
   },
 
   // 滚动内容
@@ -651,26 +641,6 @@ const styles = StyleSheet.create({
     color: Colors.text.tertiary,
     textAlign: 'right',
     marginTop: Spacing.xs
-  },
-
-  // 生成后的预览
-  previewGenerated: {
-    borderWidth: 3,
-    borderColor: Colors.primary
-  },
-  generatedBadge: {
-    position: 'absolute',
-    top: Spacing.sm,
-    left: Spacing.sm,
-    backgroundColor: Colors.primary,
-    paddingHorizontal: Spacing.sm,
-    paddingVertical: Spacing.xs,
-    borderRadius: BorderRadius.sm
-  },
-  generatedBadgeText: {
-    ...Typography.bodySmall,
-    color: Colors.text.inverse,
-    fontWeight: '600'
   },
 
   // 模态框

@@ -13,11 +13,13 @@ import {
   Animated,
   Alert
 } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
+import { Ionicons } from '@expo/vector-icons';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { Colors, Typography, Spacing } from '../constants/theme';
 import { RootStackParamList } from '../types/navigation';
+import { API_CONFIG } from '../config/api';
+import { requestBackendAnalysis } from '../services/api/analysis';
 import { aiService } from '../services/ai/AIService';
 
 type AnalysisScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Analysis'>;
@@ -56,19 +58,16 @@ export default function AnalysisScreen({ navigation, route }: Props) {
     // 模拟AI分析过程
     const runAnalysis = async () => {
       try {
-        console.log('开始AI分析:', imageUri);
-
-        // 调用AI服务 (使用Mock,无需API Key)
-        const result = await aiService.analyzeImage(imageUri);
-
-        console.log('AI分析完成:', result);
+        const result = API_CONFIG.ENABLE_BACKEND_API
+          ? await requestBackendAnalysis(imageUri)
+          : await aiService.analyzeImage(imageUri);
 
         // 分析完成,跳转到结果页
         setTimeout(() => {
           navigation.replace('Result', {
             imageUri,
             analysisResult: result
-          } as any);
+          });
         }, 500);
 
       } catch (error) {
@@ -101,9 +100,9 @@ export default function AnalysisScreen({ navigation, route }: Props) {
           }
         ]}
       >
-        {/* 猫咪Emoji动画 */}
+        {/* 猫咪图标动画 */}
         <View style={styles.catContainer}>
-          <Text style={styles.catEmoji}>🐱</Text>
+          <Ionicons name="paw-outline" size={80} color={Colors.primary} />
 
           {/* 思考动画 */}
           <ActivityIndicator

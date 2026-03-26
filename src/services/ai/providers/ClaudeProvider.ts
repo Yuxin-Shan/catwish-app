@@ -153,7 +153,6 @@ export class ClaudeProvider implements AIProvider {
     // TODO: 实现真实的图片转base64
     // 可以使用 react-native-fs
     // 暂时返回示例数据
-    console.log('转换图片为base64:', imageUri);
     return 'base64_image_data_placeholder';
   }
 }

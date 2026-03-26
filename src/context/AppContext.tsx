@@ -6,6 +6,7 @@
 
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import { Toast } from '../components/Toast';
+import { AuthSession, AuthUser, authSessionStorage } from '../services/auth/session';
 
 interface ToastMessage {
   id: string;
@@ -25,8 +26,12 @@ interface AppContextType {
   loading: boolean;
 
   // User
-  setUser: (user: any) => void;
-  user: any;
+  setUser: (user: AuthUser | null) => void;
+  user: AuthUser | null;
+  authSession: AuthSession | null;
+  authReady: boolean;
+  setAuthSession: (session: AuthSession | null) => Promise<void>;
+  clearAuthSession: () => Promise<void>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -34,7 +39,33 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [toast, setToast] = useState<ToastMessage | null>(null);
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<AuthUser | null>(null);
+  const [authSession, setAuthSessionState] = useState<AuthSession | null>(null);
+  const [authReady, setAuthReady] = useState(false);
+
+  React.useEffect(() => {
+    let mounted = true;
+
+    const bootstrapAuth = async () => {
+      try {
+        const session = await authSessionStorage.get();
+        if (mounted && session) {
+          setAuthSessionState(session);
+          setUser(session.user);
+        }
+      } finally {
+        if (mounted) {
+          setAuthReady(true);
+        }
+      }
+    };
+
+    bootstrapAuth();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const showToast = useCallback(
     (message: string, type: ToastMessage['type'] = 'info', duration = 3000) => {
@@ -52,6 +83,23 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     hideToast();
   }, [hideToast]);
 
+  const setAuthSession = useCallback(async (session: AuthSession | null) => {
+    if (session) {
+      await authSessionStorage.set(session);
+      setAuthSessionState(session);
+      setUser(session.user);
+      return;
+    }
+
+    await authSessionStorage.clear();
+    setAuthSessionState(null);
+    setUser(null);
+  }, []);
+
+  const clearAuthSession = useCallback(async () => {
+    await setAuthSession(null);
+  }, [setAuthSession]);
+
   return (
     <AppContext.Provider
       value={{
@@ -61,7 +109,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setLoading,
         loading,
         setUser,
-        user
+        user,
+        authSession,
+        authReady,
+        setAuthSession,
+        clearAuthSession,
       }}
     >
       {children}

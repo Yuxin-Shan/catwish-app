@@ -1,0 +1,174 @@
+name: CatWishExpo CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  quality-gates:
+    name: Quality Gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Verify bootstrap contract
+        run: |
+          test -f package.json
+          test -f package-lock.json
+          test -f tsconfig.json
+          test -f jest.config.js
+          test -f eslint.config.js
+          test -f .env.example
+          node -e "const pkg=require('./package.json'); const required=['lint','typecheck','test','build:web']; for (const script of required) { if (!pkg.scripts || !pkg.scripts[script]) { throw new Error('Missing script: ' + script); } }"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run lint
+        run: npm run lint
+
+      - name: Run typecheck
+        run: npm run typecheck
+
+      - name: Run tests
+        run: npm test -- --runInBand
+
+      - name: Run web build smoke check
+        run: npm run build:web
+
+      - name: Upload web build artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-dist
+          path: dist/
+          retention-days: 7
+
+  backend-quality-gates:
+    name: Backend Quality Gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Verify backend bootstrap contract
+        working-directory: backend
+        run: |
+          test -f package.json
+          test -f package-lock.json
+          test -f tsconfig.json
+          test -f .env.example
+          test -f drizzle.config.ts
+          node -e "const pkg=require('./package.json'); const required=['dev','build','start','typecheck','db:generate','db:migrate']; for (const script of required) { if (!pkg.scripts || !pkg.scripts[script]) { throw new Error('Missing backend script: ' + script); } }"
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: npm ci
+
+      - name: Install contracts dependencies
+        working-directory: packages/contracts
+        run: npm ci
+
+      - name: Build contracts for backend consumption
+        working-directory: packages/contracts
+        run: npm run build
+
+      - name: Run backend typecheck
+        working-directory: backend
+        run: npm run typecheck
+
+      - name: Run backend build
+        working-directory: backend
+        run: npm run build
+
+      - name: Run backend migration generation smoke check
+        working-directory: backend
+        run: npm run db:generate
+
+  contracts-quality-gates:
+    name: Contracts Quality Gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: packages/contracts/package-lock.json
+
+      - name: Verify contracts bootstrap contract
+        working-directory: packages/contracts
+        run: |
+          test -f package.json
+          test -f package-lock.json
+          test -f tsconfig.json
+          node -e "const pkg=require('./package.json'); const required=['build','typecheck']; for (const script of required) { if (!pkg.scripts || !pkg.scripts[script]) { throw new Error('Missing contracts script: ' + script); } }"
+
+      - name: Install contracts dependencies
+        working-directory: packages/contracts
+        run: npm ci
+
+      - name: Run contracts typecheck
+        working-directory: packages/contracts
+        run: npm run typecheck
+
+      - name: Run contracts build
+        working-directory: packages/contracts
+        run: npm run build
+
+  audit:
+    name: Dependency Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        continue-on-error: true
+        run: npm audit --audit-level=high

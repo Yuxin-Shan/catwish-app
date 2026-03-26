@@ -14,11 +14,12 @@ import {
   ActivityIndicator,
   Dimensions
 } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 
 import { Colors, Typography, Spacing } from '../constants/theme';
 import { RootStackParamList } from '../types/navigation';
+import { ScreenHeader } from '../components/ScreenHeader';
 
 type CameraScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Camera'>;
 
@@ -56,7 +57,6 @@ export default function CameraScreen({ navigation, route }: Props) {
       };
 
       setCapturedImage(mockPhoto);
-      console.log('拍照完成:', mockPhoto);
     } catch (error: any) {
       Alert.alert('拍照失败', error.message || '无法访问相机,请检查权限设置');
     } finally {
@@ -77,7 +77,6 @@ export default function CameraScreen({ navigation, route }: Props) {
       };
 
       setCapturedImage(mockPhoto);
-      console.log('相册选择完成:', mockPhoto);
     } catch (error: any) {
       if (error.message === '用户取消选择') {
         return;
@@ -103,7 +102,6 @@ export default function CameraScreen({ navigation, route }: Props) {
       };
 
       setCapturedImage(croppedPhoto);
-      console.log('裁剪完成:', croppedPhoto);
     } catch (error: any) {
       Alert.alert('裁剪失败', error.message || '无法裁剪图片');
     } finally {
@@ -115,7 +113,7 @@ export default function CameraScreen({ navigation, route }: Props) {
     if (capturedImage) {
       navigation.navigate('Analysis', {
         imageUri: capturedImage.uri
-      } as any);
+      });
     }
   };
 
@@ -130,21 +128,22 @@ export default function CameraScreen({ navigation, route }: Props) {
   return (
     <View style={styles.container}>
       {/* 顶部栏 */}
-      <View style={styles.topBar}>
-        <TouchableOpacity onPress={handleBack} style={styles.backButton}>
-          <Text style={styles.backIcon}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>拍照解读</Text>
-        <TouchableOpacity style={styles.flashButton}>
-          <Text style={styles.flashIcon}>⚡</Text>
-        </TouchableOpacity>
-      </View>
+      <ScreenHeader
+        title="拍照解读"
+        onBack={handleBack}
+        rightIcon="flash"
+        onRightPress={() => {}}
+        titleColor={Colors.text.inverse}
+        iconColor={Colors.text.inverse}
+        backgroundColor="#000"
+        testID="camera-header"
+      />
 
       {/* 相机取景框 */}
       <View style={styles.cameraFrame}>
         {capturedImage ? (
           <View style={styles.previewContainer}>
-            <Text style={styles.previewEmoji}>🐱</Text>
+            <Ionicons name="image-outline" size={80} color={Colors.text.secondary} />
             <Text style={styles.previewText}>{capturedImage.uri}</Text>
             <Text style={styles.previewSize}>
               {capturedImage.width}x{capturedImage.height}
@@ -152,11 +151,11 @@ export default function CameraScreen({ navigation, route }: Props) {
           </View>
         ) : (
           <>
-            <View style={styles.frame}>
-              <View style={styles.cornerTL} />
-              <View style={styles.cornerTR} />
-              <View style={styles.cornerBL} />
-              <View style={styles.cornerBR} />
+            <View style={styles.frame} testID="camera-frame">
+              <View style={styles.cornerTL} testID="corner-tl" />
+              <View style={styles.cornerTR} testID="corner-tr" />
+              <View style={styles.cornerBL} testID="corner-bl" />
+              <View style={styles.cornerBR} testID="corner-br" />
             </View>
             <Text style={styles.hint}>让猫咪在框框内~</Text>
           </>
@@ -193,16 +192,17 @@ export default function CameraScreen({ navigation, route }: Props) {
               onPress={handlePickFromGallery}
               disabled={loading}
             >
-              <Text style={styles.galleryIcon}>🖼️</Text>
+              <Ionicons name="images-outline" size={28} color={Colors.text.primary} />
               <Text style={styles.galleryLabel}>相册</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.captureButton}
               onPress={handleTakePhoto}
               disabled={loading}
+              testID="capture-button"
             >
               {loading ? (
-                <ActivityIndicator color={Colors.background.primary} size={32} />
+                <ActivityIndicator color={Colors.background.primary} size={32} testID="activity-indicator" />
               ) : (
                 <View style={styles.captureInner} />
               )}
@@ -215,7 +215,8 @@ export default function CameraScreen({ navigation, route }: Props) {
       {/* 提示 */}
       {!capturedImage && (
         <View style={styles.tipContainer}>
-          <Text style={styles.tip}>💡 提示: 让猫咪看着镜头更准确</Text>
+          <Ionicons name="bulb-outline" size={16} color={Colors.text.secondary} />
+          <Text style={styles.tip}> 提示: 让猫咪看着镜头更准确</Text>
         </View>
       )}
     </View>
@@ -230,39 +231,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#000'
   },
 
-  // 顶部栏
-  topBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: Spacing.lg,
-    paddingTop: 60,
-    paddingBottom: Spacing.md
-  },
-  backButton: {
-    width: 44,
-    height: 44,
-    alignItems: 'flex-start',
-    justifyContent: 'center'
-  },
-  backIcon: {
-    fontSize: 28,
-    color: Colors.text.inverse
-  },
-  title: {
-    ...Typography.bodyLarge,
-    color: Colors.text.inverse,
-    fontWeight: '600'
-  },
-  flashButton: {
-    width: 44,
-    height: 44,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  flashIcon: {
-    fontSize: 24
-  },
 
   // 相机取景框
   cameraFrame: {

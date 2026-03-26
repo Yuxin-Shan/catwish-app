@@ -3,7 +3,7 @@
  * 性能优化工具函数
  */
 
-import { useCallback, useRef, useEffect } from 'react';
+import React, { useCallback, useRef, useEffect } from 'react';
 
 /**
  * 防抖Hook
@@ -69,28 +69,24 @@ export function useThrottle<T extends (...args: any[]) => any>(
  */
 export function usePerformanceMonitor(componentName: string) {
   const renderCountRef = useRef(0);
-  const mountTimeRef = useRef(Date.now());
+  const mountTimeRef = useRef<number | null>(null);
 
   useEffect(() => {
-    renderCountRef.current += 1;
-
-    const currentTime = Date.now();
-    const mountDuration = currentTime - mountTimeRef.current;
-
-    if (process.env.NODE_ENV === 'development') {
-      console.log(
-        `[Performance] ${componentName} - Render #${renderCountRef.current}, ` +
-        `Mount: ${mountDuration}ms`
-      );
+    if (mountTimeRef.current === null) {
+      mountTimeRef.current = Date.now();
     }
+
+    renderCountRef.current += 1;
   });
 
   const getReport = useCallback(() => {
+    const mountTime = mountTimeRef.current ?? 0;
+
     return {
       component: componentName,
       renders: renderCountRef.current,
-      mountTime: mountTimeRef.current,
-      uptime: Date.now() - mountTimeRef.current
+      mountTime,
+      uptime: mountTime ? Date.now() - mountTime : 0
     };
   }, [componentName]);
 
@@ -110,9 +106,10 @@ export function lazyLoad<T extends React.ComponentType<any>>(
     importFunc().catch((error) => {
       console.error('Lazy load error:', error);
       // 返回一个默认组件或错误组件
+      // 注意: 这里需要 as any，因为类型系统无法表达错误情况下的默认组件
       return {
-        default: () => React.createElement(fallback)
-      } as any;
+        default: fallback as T
+      } as { default: T };
     })
   );
 }

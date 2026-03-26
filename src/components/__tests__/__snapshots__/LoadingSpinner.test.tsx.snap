@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingSpinner Snapshot should match snapshot for default spinner 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "padding": 16,
+    }
+  }
+>
+  <ActivityIndicator
+    color="#FFB6C1"
+    size="large"
+  />
+</View>
+`;
+
+exports[`LoadingSpinner Snapshot should match snapshot for fullScreen spinner 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "rgba(255, 255, 255, 0.9)",
+      "bottom": 0,
+      "justifyContent": "center",
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+      "zIndex": 999,
+    }
+  }
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "padding": 16,
+      }
+    }
+  >
+    <ActivityIndicator
+      color="#FFB6C1"
+      size="large"
+    />
+  </View>
+</View>
+`;
+
+exports[`LoadingSpinner Snapshot should match snapshot for large spinner 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "padding": 16,
+    }
+  }
+>
+  <ActivityIndicator
+    color="#FFB6C1"
+    size="large"
+  />
+</View>
+`;
+
+exports[`LoadingSpinner Snapshot should match snapshot for small spinner 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "padding": 16,
+    }
+  }
+>
+  <ActivityIndicator
+    color="#FFB6C1"
+    size="small"
+  />
+</View>
+`;
+
+exports[`LoadingSpinner Snapshot should match snapshot for spinner with custom color 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "padding": 16,
+    }
+  }
+>
+  <ActivityIndicator
+    color="#FF0000"
+    size="large"
+  />
+</View>
+`;
+
+exports[`LoadingSpinner Snapshot should match snapshot for spinner with text 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "padding": 16,
+    }
+  }
+>
+  <ActivityIndicator
+    color="#FFB6C1"
+    size="large"
+  />
+  <Text
+    style={
+      {
+        "color": "#666666",
+        "fontSize": 14,
+        "fontWeight": "400",
+        "lineHeight": 20,
+        "marginTop": 12,
+      }
+    }
+  >
+    Loading...
+  </Text>
+</View>
+`;

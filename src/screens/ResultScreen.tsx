@@ -12,10 +12,8 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
-  Share,
-  Platform
+  Share
 } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { Colors, Typography, Spacing, BorderRadius, Shadow } from '../constants/theme';
@@ -23,8 +21,9 @@ import { RootStackParamList } from '../types/navigation';
 import { AnalysisResult } from '../services/ai/types';
 import { storageService } from '../services/storage';
 import { Button } from '../components/Button';
+import { ScreenHeader } from '../components/ScreenHeader';
 
-type ResultScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Result'>;
+type ResultScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Result'>;
 
 interface Props {
   navigation: ResultScreenNavigationProp;
@@ -39,12 +38,7 @@ interface Props {
 export default function ResultScreen({ navigation, route }: Props) {
   const { imageUri, analysisResult } = route.params;
 
-  // 保存到本地存储
-  React.useEffect(() => {
-    saveToHistory();
-  }, []);
-
-  const saveToHistory = async () => {
+  const saveToHistory = React.useCallback(async () => {
     try {
       const record = {
         id: Date.now().toString(),
@@ -55,29 +49,29 @@ export default function ResultScreen({ navigation, route }: Props) {
       };
 
       await storageService.saveAnalysis(record);
-      console.log('已保存到历史记录:', record);
     } catch (error) {
       console.error('保存失败:', error);
     }
-  };
+  }, [analysisResult, imageUri]);
+
+  // 保存到本地存储
+  React.useEffect(() => {
+    saveToHistory();
+  }, [saveToHistory]);
 
   const handleGenerateMeme = () => {
     navigation.navigate('MemeEditor', {
       imageUri,
       analysisResult
-    } as any);
+    });
   };
 
   const handleShare = async () => {
     try {
-      const { url } = await Share.share({
+      await Share.share({
         message: `我家的猫咪说: "${analysisResult.catSays}" 🐱\n\n用猫语心愿APP看看你的猫咪在想什么~`,
         url: 'https://catwish.app' // 未来添加
       });
-
-      if (url) {
-        console.log('分享成功:', url);
-      }
     } catch (error: any) {
       console.error('分享失败:', error);
     }
@@ -88,7 +82,7 @@ export default function ResultScreen({ navigation, route }: Props) {
       '保存成功',
       '已保存到历史记录',
       [
-        { text: '查看历史', onPress: () => navigation.navigate('History' as any) },
+        { text: '查看历史', onPress: () => navigation.navigate('MainTabs') },
         { text: '确定', style: 'cancel' }
       ]
     );
@@ -104,37 +98,16 @@ export default function ResultScreen({ navigation, route }: Props) {
     );
   };
 
-  // 获取情绪颜色
-  const getEmotionColor = (emotion: string) => {
-    const emotionColors: Record<string, string> = {
-      '😊': Colors.emotions.happy,
-      '😌': Colors.emotions.relaxed,
-      '😰': Colors.emotions.anxious,
-      '😠': Colors.emotions.angry,
-      '🤔': Colors.emotions.curious,
-      '😽': Colors.emotions.affectionate
-    };
-
-    for (const [key, color] of Object.entries(emotionColors)) {
-      if (emotion.includes(key)) {
-        return color;
-      }
-    }
-    return Colors.primary;
-  };
-
   return (
     <View style={styles.container}>
       {/* 顶部导航 */}
-      <View style={styles.navBar}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={styles.backIcon}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.navTitle}>解读结果</Text>
-        <TouchableOpacity style={styles.moreButton} onPress={handleReanalyze}>
-          <Text style={styles.moreIcon}>🔄</Text>
-        </TouchableOpacity>
-      </View>
+      <ScreenHeader
+        title="解读结果"
+        onBack={() => navigation.goBack()}
+        rightIcon="refresh"
+        onRightPress={handleReanalyze}
+        testID="result-header"
+      />
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
         {/* 猫咪照片 */}
@@ -236,40 +209,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background.secondary
   },
 
-  // 导航栏
-  navBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: Spacing.lg,
-    paddingTop: 60,
-    paddingBottom: Spacing.md,
-    backgroundColor: Colors.background.primary
-  },
-  backButton: {
-    width: 44,
-    height: 44,
-    alignItems: 'flex-start',
-    justifyContent: 'center'
-  },
-  backIcon: {
-    fontSize: 28,
-    color: Colors.text.primary
-  },
-  navTitle: {
-    ...Typography.bodyLarge,
-    color: Colors.text.primary,
-    fontWeight: '600'
-  },
-  moreButton: {
-    width: 44,
-    height: 44,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  moreIcon: {
-    fontSize: 24
-  },
 
   // 滚动内容
   scrollContent: {

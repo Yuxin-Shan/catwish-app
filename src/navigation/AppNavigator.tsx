@@ -106,15 +106,8 @@ export default function AppNavigator() {
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          cardStyle: { backgroundColor: '#FFF5F7' },
-          // 页面转场动画
-          cardStyleInterpolator: ({ current, layouts }) => {
-            return {
-              cardStyle: {
-                opacity: current.progress
-              }
-            };
-          }
+          contentStyle: { backgroundColor: '#FFF5F7' },
+          animation: 'fade'
         }}
       >
         {/* 底部Tab页面 */}

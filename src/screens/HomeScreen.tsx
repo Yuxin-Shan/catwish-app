@@ -13,30 +13,43 @@ import {
   ScrollView
 } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 
 import { Colors, Typography, Spacing, BorderRadius } from '../constants/theme';
-import { RootStackParamList } from '../types/navigation';
+import { RootStackParamList, MainTabParamList } from '../types/navigation';
+import { CompositeNavigationProp } from '@react-navigation/native';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { ScreenHeader } from '../components/ScreenHeader';
 
-type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+type HomeScreenNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<MainTabParamList>,
+  NativeStackNavigationProp<RootStackParamList>
+>;
 
 interface Props {
   navigation: HomeScreenNavigationProp;
 }
 
 const HomeScreen = ({ navigation }: Props) => {
+  const rootNavigation = navigation as unknown as NativeStackNavigationProp<RootStackParamList>;
+  const tabNavigation = navigation as unknown as BottomTabNavigationProp<MainTabParamList>;
+
   // 使用useCallback缓存函数,避免不必要的重渲染
   const handleCameraPress = useCallback(() => {
-    navigation.navigate('Camera' as any);
-  }, [navigation]);
+    rootNavigation.navigate({
+      name: 'Camera',
+      params: {}
+    });
+  }, [rootNavigation]);
 
   const handleGalleryPress = useCallback(() => {
     // TODO: 实现相册选择
-    console.log('从相册选择');
+    // 功能待实现
   }, []);
 
   const handleSeeAllPress = useCallback(() => {
-    navigation.navigate('History' as any);
-  }, [navigation]);
+    tabNavigation.navigate('History');
+  }, [tabNavigation]);
 
   // 使用useMemo缓存静态内容
   const illustrationContent = useMemo(() => ({
@@ -48,12 +61,12 @@ const HomeScreen = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
       {/* 头部 */}
-      <View style={styles.header}>
-        <Text style={styles.title}>🐱 猫语心愿</Text>
-        <TouchableOpacity style={styles.settingsButton}>
-          <Text style={styles.settingsIcon}>⚙️</Text>
-        </TouchableOpacity>
-      </View>
+      <ScreenHeader
+        title="🐱 猫语心愿"
+        rightIcon="settings"
+        onRightPress={() => {}}
+        testID="home-header"
+      />
 
       {/* 主内容区 */}
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -71,7 +84,7 @@ const HomeScreen = ({ navigation }: Props) => {
             onPress={handleCameraPress}
             activeOpacity={0.8}
           >
-            <Text style={styles.cameraIcon}>📷</Text>
+            <Ionicons name="camera" size={32} color={Colors.text.inverse} />
             <Text style={styles.primaryButtonText}>拍照解读猫咪心情</Text>
           </TouchableOpacity>
 
@@ -80,7 +93,7 @@ const HomeScreen = ({ navigation }: Props) => {
             onPress={handleGalleryPress}
             activeOpacity={0.8}
           >
-            <Text style={styles.galleryIcon}>🖼️</Text>
+            <Ionicons name="image" size={32} color={Colors.text.inverse} />
             <Text style={styles.primaryButtonText}>从相册选择</Text>
           </TouchableOpacity>
         </View>
@@ -116,30 +129,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background.secondary
-  },
-
-  // 头部
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: Spacing.lg,
-    paddingTop: 60,
-    paddingBottom: Spacing.md,
-    backgroundColor: Colors.background.primary
-  },
-  title: {
-    ...Typography.h2,
-    color: Colors.text.primary
-  },
-  settingsButton: {
-    width: 40,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  settingsIcon: {
-    fontSize: 24
   },
 
   // 滚动内容
@@ -188,14 +177,6 @@ const styles = StyleSheet.create({
   },
   galleryButton: {
     backgroundColor: Colors.secondary
-  },
-  cameraIcon: {
-    fontSize: 32,
-    marginBottom: Spacing.sm
-  },
-  galleryIcon: {
-    fontSize: 32,
-    marginBottom: Spacing.sm
   },
   primaryButtonText: {
     ...Typography.buttonLarge,

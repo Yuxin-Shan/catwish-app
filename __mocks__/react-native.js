@@ -60,6 +60,8 @@ export const Platform = {
 
 export const StyleSheet = {
   create: (styles) => styles,
+  flatten: (styles) => styles,
+  compose: (style1, style2) => ({ ...style1, ...style2 }),
   hairlineWidth: 1,
 };
 

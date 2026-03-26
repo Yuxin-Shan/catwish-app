@@ -204,12 +204,8 @@ export class StorageService {
    * 获取分析记录索引
    */
   private async getAnalysisIndex(): Promise<string[]> {
-    try {
-      const data = await AsyncStorage.getItem(STORAGE_KEYS.ANALYSIS_INDEX);
-      return data ? JSON.parse(data) : [];
-    } catch {
-      return [];
-    }
+    const data = await AsyncStorage.getItem(STORAGE_KEYS.ANALYSIS_INDEX);
+    return data ? JSON.parse(data) : [];
   }
 
   /**

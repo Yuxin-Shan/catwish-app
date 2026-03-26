@@ -4,9 +4,9 @@
  * 用于显示成功、错误、警告等消息
  */
 
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Animated, Dimensions } from 'react-native';
-import { Colors, Typography, Spacing, BorderRadius } from '../constants/theme';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Text, StyleSheet, Animated } from 'react-native';
+import { Typography, Spacing, BorderRadius } from '../constants/theme';
 
 interface ToastProps {
   message: string;
@@ -15,8 +15,6 @@ interface ToastProps {
   visible: boolean;
   onDismiss?: () => void;
 }
-
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 export const Toast: React.FC<ToastProps> = ({
   message,
@@ -28,30 +26,7 @@ export const Toast: React.FC<ToastProps> = ({
   const [opacity] = useState(new Animated.Value(0));
   const [translateY] = useState(new Animated.Value(-100));
 
-  useEffect(() => {
-    if (visible) {
-      Animated.parallel([
-        Animated.timing(opacity, {
-          toValue: 1,
-          duration: 300,
-          useNativeDriver: true
-        }),
-        Animated.spring(translateY, {
-          toValue: 0,
-          friction: 8,
-          useNativeDriver: true
-        })
-      ]).start();
-
-      const timer = setTimeout(() => {
-        hideToast();
-      }, duration);
-
-      return () => clearTimeout(timer);
-    }
-  }, [visible]);
-
-  const hideToast = () => {
+  const hideToast = useCallback(() => {
     Animated.parallel([
       Animated.timing(opacity, {
         toValue: 0,
@@ -66,7 +41,32 @@ export const Toast: React.FC<ToastProps> = ({
     ]).start(() => {
       onDismiss?.();
     });
-  };
+  }, [onDismiss, opacity, translateY]);
+
+  useEffect(() => {
+    if (!visible) {
+      return undefined;
+    }
+
+    Animated.parallel([
+      Animated.timing(opacity, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: true
+      }),
+      Animated.spring(translateY, {
+        toValue: 0,
+        friction: 8,
+        useNativeDriver: true
+      })
+    ]).start();
+
+    const timer = setTimeout(() => {
+      hideToast();
+    }, duration);
+
+    return () => clearTimeout(timer);
+  }, [duration, hideToast, opacity, translateY, visible]);
 
   if (!visible) return null;
 

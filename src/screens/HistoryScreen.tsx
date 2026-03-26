@@ -15,13 +15,14 @@ import {
   TouchableOpacity,
   Alert
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { Colors, Typography, Spacing, BorderRadius, Shadow } from '../constants/theme';
 import { storageService, AnalysisRecord } from '../services/storage';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types/navigation';
 
-type HistoryScreenNavigationProp = StackNavigationProp<RootStackParamList>;
+type HistoryScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 interface Props {
   navigation: HistoryScreenNavigationProp;
@@ -118,7 +119,7 @@ export default function HistoryScreen({ navigation }: Props) {
   };
 
   const handleRecordPress = (record: AnalysisRecord) => {
-    navigation.navigate('Result' as any, {
+    navigation.navigate('Result', {
       imageUri: record.imageUri,
       analysisResult: record.result
     });
@@ -201,7 +202,7 @@ export default function HistoryScreen({ navigation }: Props) {
       ) : filteredRecords.length === 0 ? (
         <ScrollView style={styles.list} contentContainerStyle={styles.listContent}>
           <View style={styles.emptyState}>
-            <Text style={styles.emptyEmoji}>😿</Text>
+            <Ionicons name="document-text-outline" size={64} color={Colors.text.tertiary} />
             <Text style={styles.emptyText}>还没有记录哦</Text>
             <Text style={styles.emptySubtext}>快去拍第一张照片吧~</Text>
           </View>
